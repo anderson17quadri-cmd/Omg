@@ -35,7 +35,7 @@
         el.classList.add("in");
         io.unobserve(el);
       });
-    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px -6% 0px" });
     reveals.forEach(function (el) { io.observe(el); });
 
     // Rede de segurança: revela o que já está (quase) visível ao carregar,
@@ -108,6 +108,19 @@
   }
   emberField(document.getElementById("embers"), { density: 0.00010 });
   emberField(document.getElementById("embers2"), { density: 0.00016 });
+
+  /* ---------- Hero: rotação dos melhores pratos ---------- */
+  var heroFrames = document.querySelectorAll(".hero__frame");
+  var heroCap = document.getElementById("heroCap");
+  if (heroFrames.length > 1 && !reduce) {
+    var hi = 0;
+    setInterval(function () {
+      heroFrames[hi].classList.remove("is-active");
+      hi = (hi + 1) % heroFrames.length;
+      heroFrames[hi].classList.add("is-active");
+      if (heroCap) heroCap.textContent = heroFrames[hi].getAttribute("data-cap") || "";
+    }, 3400);
+  }
 
   /* ---------- Carrossel ---------- */
   var track = document.getElementById("carouselTrack");

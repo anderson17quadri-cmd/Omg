@@ -68,9 +68,15 @@
         </dl>
       </div>
 
-      <figure class="hero__photo reveal">
-        <img src="galeria/foto-40.jpeg" alt="Peixe grelhado na brasa, servido no OMG - Oh My Grill" />
-        <figcaption>Peixe grelhado · direto da brasa</figcaption>
+      <figure class="hero__photo reveal" id="heroPhoto">
+        <img class="hero__frame is-active" src="galeria/foto-40.jpeg" alt="Peixe grelhado na brasa" data-cap="Peixe grelhado · direto da brasa" />
+        <img class="hero__frame" src="galeria/foto-27.jpeg" alt="Hambúrguer OMG" data-cap="Hambúrguer OMG · no capricho" loading="lazy" />
+        <img class="hero__frame" src="galeria/foto-26.jpeg" alt="Espeto grelhado na brasa" data-cap="Espeto grelhado na brasa" loading="lazy" />
+        <img class="hero__frame" src="galeria/foto-22.jpeg" alt="Frango grelhado com batata" data-cap="Frango grelhado &amp; batata" loading="lazy" />
+        <img class="hero__frame" src="galeria/foto-42.jpeg" alt="Bitoque à Chef com ovo estrelado" data-cap="Bitoque à Chef · ovo estrelado" loading="lazy" />
+        <img class="hero__frame" src="galeria/foto-17.jpeg" alt="Frango Parma gratinado" data-cap="Frango Parma · gratinado" loading="lazy" />
+        <img class="hero__frame" src="galeria/foto-09.jpeg" alt="Peixe do dia fresco" data-cap="Peixe do dia · fresco" loading="lazy" />
+        <figcaption id="heroCap">Peixe grelhado · direto da brasa</figcaption>
       </figure>
     </div>
   </section>
@@ -175,19 +181,74 @@
     </div>
   </section>
 
-  <!-- ===== EMENTA COMPLETA ===== -->
+  <!-- ===== EMENTA COMPLETA (redesenhada) ===== -->
   <section class="section" id="ementa">
     <header class="section__head">
-      <span class="kicker reveal">Ementa completa</span>
-      <h2 class="section__title reveal">Tudo o que servimos</h2>
-      <p class="section__sub reveal">Tapas, pratos principais, hambúrgueres e menu do dia. Toque para ampliar.</p>
+      <span class="kicker reveal">A carta</span>
+      <h2 class="section__title reveal">Ementa completa</h2>
+      <p class="section__sub reveal">Tapas, pratos principais, hambúrgueres e o Menu do Dia. <span class="veg-key">🌱 vegetariano / vegan</span></p>
     </header>
-    <figure class="ementa reveal">
-      <a href="assets/menu.jpeg" target="_blank" rel="noopener">
-        <img src="assets/menu.jpeg" alt="Ementa completa do OMG - Oh My Grill" loading="lazy" />
-      </a>
-      <figcaption>Dispomos de informação sobre alergénios · Preços com IVA incluído</figcaption>
-    </figure>
+
+    <div class="menu-full">
+      <!-- Tapas -->
+      <div class="mcat reveal">
+        <div class="mcat__head"><h3>Tapas &amp; Entradas</h3><span class="mcat__en">Starters</span></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Couvert</span><span class="dots"></span><span class="mitem__price">2,80€</span></div><p class="mitem__desc">Tostinhas, manteiga e azeitonas.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Pão de manteiga de alho</span><span class="dots"></span><span class="mitem__price">3,50€</span></div><p class="mitem__desc">Garlic bread.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Pão de manteiga de alho e queijo</span><span class="dots"></span><span class="mitem__price">4,20€</span></div><p class="mitem__desc">Cheesy garlic bread.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Pimentos Padrón assados <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">3,60€</span></div><p class="mitem__desc">Roasted Padrón peppers.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Húmus de beringela c/ tostinhas <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">3,95€</span></div><p class="mitem__desc">Aubergine hummus with crostinis.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Queijo Brie panado c/ ketchup picante</span><span class="dots"></span><span class="mitem__price">4,00€</span></div><p class="mitem__desc">Brie fritters with spicy ketchup.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Aros de cebola panados <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">4,40€</span></div><p class="mitem__desc">Battered onion rings.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Asas de frango c/ teriyaki e sementes</span><span class="dots"></span><span class="mitem__price">4,40€</span></div><p class="mitem__desc">Chicken wings, teriyaki &amp; seeds.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Nuggets de frango c/ sweet chili</span><span class="dots"></span><span class="mitem__price">4,50€</span></div><p class="mitem__desc">Chicken nuggets with sweet chili.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Argolas de lula panadas c/ maionese de ervas</span><span class="dots"></span><span class="mitem__price">4,40€</span></div><p class="mitem__desc">Squid rings, herb mayo.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Tempura de peixe c/ gribiche</span><span class="dots"></span><span class="mitem__price">4,50€</span></div><p class="mitem__desc">Tempura fish with gribiche.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Tempura de camarão c/ sweet chili</span><span class="dots"></span><span class="mitem__price">5,50€</span></div><p class="mitem__desc">Tempura prawns with sweet chili.</p></div>
+      </div>
+
+      <!-- Pratos Principais -->
+      <div class="mcat reveal">
+        <div class="mcat__head"><h3>Pratos Principais</h3><span class="mcat__en">Mains</span></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Bife da Casa</span><span class="dots"></span><span class="mitem__price">19,99€</span></div><p class="mitem__desc">Bife da vazia grelhado, tomate e cogumelos assados, salada, aros de cebola, manteiga de alho e batata frita c/ óleo de trufa e parmesão. <em>Adicione camarão +3,50€.</em></p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Costeletas de Borrego</span><span class="dots"></span><span class="mitem__price">16,85€</span></div><p class="mitem__desc">C/ batatas salteadas, húmus de beringela e salada mista.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Frango Parma</span><span class="dots"></span><span class="mitem__price">12,80€</span></div><p class="mitem__desc">Tiras de frango panadas c/ parmesão e trufa, batata frita e salada mista.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Bitoque à Chef</span><span class="dots"></span><span class="mitem__price">11,50€</span></div><p class="mitem__desc">Vaca, frango ou porco c/ ovo estrelado, batata frita, arroz e salada de alface.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Veggie Bitoque <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">12,50€</span></div><p class="mitem__desc">Panado de "frango" vegetariano c/ ovo estrelado, batata frita, arroz e salada.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Massa de Camarão</span><span class="dots"></span><span class="mitem__price">15,99€</span></div><p class="mitem__desc">Massa de tinta de choco c/ camarão, molho cremoso, espinafres, tomate cereja e rúcula.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Camarão ao Estilo da Casa</span><span class="dots"></span><span class="mitem__price">11,50€</span></div><p class="mitem__desc">Camarão panado, batata frita, salada e molho de maionese e alho.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Fish &amp; Chips</span><span class="dots"></span><span class="mitem__price">11,99€</span></div><p class="mitem__desc">Filete de peixe panado, batata frita, molho gribiche e ervilhas.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Salada César <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">10,50€</span></div><p class="mitem__desc">Alface, molho César, parmesão, lardons de bacon, anchovas, crostinis e ovo cozido. Versão vegetariana disponível. <em>Adicione camarão ou frango +3,50€.</em></p></div>
+      </div>
+
+      <!-- Hambúrgueres -->
+      <div class="mcat reveal">
+        <div class="mcat__head"><h3>Hambúrgueres</h3><span class="mcat__en">Burgers</span></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">OMG</span><span class="dots"></span><span class="mitem__price">14,85€</span></div><p class="mitem__desc">Carne de vaca, queijo, bacon, ovo estrelado, alface, tomate, pepino em vinagre, maionese de alho e Dijon, cebola caramelizada, batata frita e aros de cebola.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Frango &amp; Chouriço</span><span class="dots"></span><span class="mitem__price">13,85€</span></div><p class="mitem__desc">Frango e chouriço grelhado, alface, tomate, pepino em vinagre, maioneses, cebola caramelizada, batata frita e aros de cebola.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Bello <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">13,65€</span></div><p class="mitem__desc">Cogumelo Portobello assado, queijo, ovo estrelado, alface, tomate, pepino em vinagre, maioneses, cebola caramelizada, batata frita e aros de cebola.</p></div>
+        <div class="mitem"><div class="mitem__row"><span class="mitem__name">Oh My Vegan <span class="veg">🌱</span></span><span class="dots"></span><span class="mitem__price">13,50€</span></div><p class="mitem__desc">Hambúrguer de soja, queijo vegetal, alface, tomate, pepino em vinagre, maionese de abacate, cebola caramelizada, batata frita e aros de cebola.</p></div>
+      </div>
+
+      <!-- Menu do Dia (destaque) -->
+      <div class="menu-highlight reveal">
+        <div class="menu-highlight__offer">
+          <span class="kicker kicker--light">Seg a Sex · ao almoço</span>
+          <h3>Menu completo</h3>
+          <p>Sopa + Prato do Dia + Bebida de copo + Café expresso. <span class="dim">Bebida fora do menu +1,00€ · Sobremesa do dia +2,00€.</span></p>
+          <span class="menu-highlight__price">11,95€</span>
+        </div>
+        <div class="menu-highlight__offer">
+          <span class="kicker kicker--light">Para levar</span>
+          <h3>Take Away</h3>
+          <p>Sopa + Prato do Dia. <span class="dim">Acresce o valor das caixas de take away.</span></p>
+          <span class="menu-highlight__price">9,50€</span>
+        </div>
+      </div>
+
+      <p class="menu-sauces reveal">Molhos — ketchup 0,30€ · maionese 0,50€ · maionese de alho 0,70€ · gribiche 0,70€ · manteiga de alho 1€</p>
+      <p class="menu-foot reveal">Dispomos de informação sobre alergénios · Preços com IVA incluído · <a href="assets/menu.jpeg" target="_blank" rel="noopener" class="link-arrow">ver ementa original →</a></p>
+    </div>
   </section>
 
   <!-- ===== DEPOIMENTOS ===== -->

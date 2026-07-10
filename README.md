@@ -35,8 +35,9 @@ Depois abra no navegador do telemóvel: **http://localhost:8000**
 
 ## ✨ Destaques do design
 
-- **Hero** com partículas de brasa a subir (canvas) e foto real emoldurada
-- **Ementa em degustação** — nome · · · preço, com linhas pontilhadas
+- **Hero** com partículas de brasa (canvas) e foto que **roda entre os melhores pratos** (crossfade)
+- **Ementa completa redesenhada** em HTML, nas cores da marca — categorias, selos 🌱, preços em dourado e o Menu do Dia em destaque (a imagem original fica acessível em "ver ementa original")
+- **Destaques em degustação** — nome · · · preço, com linhas pontilhadas
 - **Menu do Dia** em painel dividido com foto e preço em destaque
 - **Galeria** cinematográfica: 42 fotos reais em carrossel automático (setas,
   contador, barra de progresso, pontos e *swipe*)
