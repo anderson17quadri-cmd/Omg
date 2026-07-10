@@ -3,290 +3,257 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OMG - Oh My Grill | Comer bem nunca foi tão fácil · Carregal do Sal</title>
-  <meta name="description" content="OMG - Oh My Grill em Carregal do Sal: Menu do Dia a 11,95€, hambúrgueres artesanais, pratos na brasa e opções vegetarianas. Reserve a sua mesa ou peça Take Away." />
-  <meta name="theme-color" content="#0d0d0f" />
+  <title>OMG · Oh My Grill — Comer bem nunca foi tão fácil | Carregal do Sal</title>
+  <meta name="description" content="OMG - Oh My Grill, Carregal do Sal. Grelhados na brasa, hambúrgueres artesanais e Menu do Dia a 11,95€. Reserve a sua mesa ou peça Take Away." />
+  <meta name="theme-color" content="#17110d" />
 
   <meta property="og:type" content="restaurant" />
-  <meta property="og:title" content="OMG - Oh My Grill | Carregal do Sal" />
-  <meta property="og:description" content="Comer bem nunca foi tão fácil! Menu do Dia a 11,95€, hambúrgueres artesanais e pratos na brasa. Reserve já a sua mesa." />
+  <meta property="og:title" content="OMG · Oh My Grill — Carregal do Sal" />
+  <meta property="og:description" content="Comer bem nunca foi tão fácil. Grelhados na brasa e Menu do Dia a 11,95€." />
   <meta property="og:image" content="assets/restaurante.jpeg" />
   <meta property="og:locale" content="pt_PT" />
 
   <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- ===== ANNOUNCEMENT BAR ===== -->
-  <div class="topbar" id="topbar">
-    <span class="topbar__pulse">🍴</span>
-    <strong>Menu do Dia a 11,95€</strong>&nbsp;— Sopa + Prato + Bebida + Café · Segunda a Sexta · servido só até às 16h
+  <!-- ===== BARRA SUPERIOR ===== -->
+  <div class="topbar">
+    <span class="topbar__ember" aria-hidden="true"></span>
+    <span><b>Menu do Dia · 11,95€</b> — sopa, prato, bebida e café · Seg a Sex, só ao almoço</span>
   </div>
 
-  <!-- ===== HEADER ===== -->
+  <!-- ===== CABEÇALHO ===== -->
   <header class="header" id="header">
-    <a href="#hero" class="brand" aria-label="OMG Oh My Grill">
+    <a href="#top" class="brand" aria-label="OMG - Oh My Grill">
       <img src="assets/logo.png" alt="OMG - Oh My Grill" class="brand__logo" />
     </a>
-    <nav class="nav" aria-label="Navegação principal">
-      <a href="#destaques">Destaques</a>
+    <nav class="nav" aria-label="Navegação">
+      <a href="#ementa-destaques">Ementa</a>
       <a href="#menu-dia">Menu do Dia</a>
-      <a href="#ementa">Ementa</a>
-      <a href="#local">Contactos</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#contactos">Contactos</a>
     </nav>
-    <a href="#reservar" class="btn btn--sm btn--primary header__cta">Reservar mesa</a>
+    <a href="#reservar" class="btn btn--ember header__cta">Reservar</a>
   </header>
 
   <!-- ===== HERO ===== -->
-  <section class="hero" id="hero">
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <span class="badge">📍 Carregal do Sal · Cozinha feita na hora</span>
-      <h1 class="hero__title">
-        Comer bem nunca foi<br>
-        <span class="hl">tão fácil.</span>
-      </h1>
-      <p class="hero__lead">
-        Hambúrgueres artesanais, pratos na brasa e um <strong>Menu do Dia a 11,95€</strong>.
-        Ingredientes frescos, sabor de casa e também opções vegetarianas e vegan.
-      </p>
-      <div class="hero__actions">
-        <a href="#reservar" class="btn btn--primary btn--lg">🍽️ Reservar a minha mesa</a>
-        <a href="#ementa" class="btn btn--ghost btn--lg">Ver a ementa</a>
-      </div>
-      <ul class="hero__trust">
-        <li>✅ Menu do Dia · 11,95€</li>
-        <li>✅ Take Away · 9,50€</li>
-        <li>✅ Opções vegetarianas &amp; vegan</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ===== PROOF STRIP (factos reais) ===== -->
-  <section class="proof" aria-label="Informação rápida">
-    <div class="proof__item"><b>11,95€</b><span>Menu do Dia completo</span></div>
-    <div class="proof__item"><b>9,50€</b><span>Take Away (sopa + prato)</span></div>
-    <div class="proof__item"><b>Seg–Sex</b><span>9h às 16h</span></div>
-    <div class="proof__item"><b>100%</b><span>feito na hora</span></div>
-  </section>
-
-  <!-- ===== DESTAQUES DA EMENTA ===== -->
-  <section class="section" id="destaques">
-    <div class="section__head">
-      <span class="eyebrow">Da nossa ementa</span>
-      <h2>Os favoritos da casa</h2>
-      <p class="section__sub">Uma amostra do que servimos. Veja a ementa completa mais abaixo.</p>
-    </div>
-
-    <div class="dishes">
-      <article class="dish dish--star">
-        <div class="dish__top"><h3>Hambúrguer OMG</h3><span class="tag">🍔 O nosso ex-líbris</span></div>
-        <p>Hambúrguer de carne de vaca, queijo, bacon, ovo estrelado, alface, tomate, pepino em vinagre, maionese de alho e Dijon, cebola caramelizada, com batata frita e aros de cebola.</p>
-        <span class="price">14,85€</span>
-      </article>
-
-      <article class="dish">
-        <div class="dish__top"><h3>Bife da Casa</h3><span class="tag">🥩 Na brasa</span></div>
-        <p>Bife da vazia grelhado, servido com tomate e cogumelos assados, salada, aros de cebola, manteiga de alho e batata frita. Adicione camarão +3,50€.</p>
-        <span class="price">19,99€</span>
-      </article>
-
-      <article class="dish">
-        <div class="dish__top"><h3>Frango Parma</h3><span class="tag">⭐ Popular</span></div>
-        <p>Tiras de frango panadas com parmesão e trufa, servidas com batata frita e salada mista.</p>
-        <span class="price">12,80€</span>
-      </article>
-
-      <article class="dish">
-        <div class="dish__top"><h3>Massa de Camarão</h3><span class="tag">🦐 Especial</span></div>
-        <p>Massa de tinta de choco com camarão, molho cremoso, espinafres, tomate cereja e rúcula.</p>
-        <span class="price">15,99€</span>
-      </article>
-
-      <article class="dish">
-        <div class="dish__top"><h3>Bitoque à Chef</h3><span class="tag">🍳 Clássico</span></div>
-        <p>Vaca, frango ou porco com ovo estrelado, servido com batata frita, arroz e salada de alface.</p>
-        <span class="price">11,50€</span>
-      </article>
-
-      <article class="dish dish--veg">
-        <div class="dish__top"><h3>Oh My Vegan</h3><span class="tag">🌱 Vegan</span></div>
-        <p>Hambúrguer de soja, queijo vegetal, alface, tomate, pepino em vinagre, maionese de abacate e cebola caramelizada, com batata frita e aros de cebola.</p>
-        <span class="price">13,50€</span>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===== MENU DO DIA (oferta principal) ===== -->
-  <section class="combo" id="menu-dia">
-    <div class="combo__card">
-      <div class="combo__left">
-        <span class="eyebrow eyebrow--light">De segunda a sexta</span>
-        <h2>Menu do Dia</h2>
-        <p class="combo__desc">
-          A forma mais fácil (e saborosa) de almoçar. Comida de casa, feita na hora,
-          a um preço que faz sorrir.
+  <section class="hero" id="top">
+    <canvas class="hero__embers" id="embers" aria-hidden="true"></canvas>
+    <div class="hero__grid">
+      <div class="hero__text">
+        <span class="kicker reveal">Carregal do Sal · Casa de grelhados</span>
+        <h1 class="hero__title reveal">
+          <span class="line">Comer bem</span>
+          <span class="line">nunca foi</span>
+          <span class="line line--em"><em>tão fácil.</em></span>
+        </h1>
+        <p class="hero__lead reveal">
+          Carne e peixe na brasa, hambúrgueres artesanais e um Menu do Dia
+          que sabe a casa. Ingredientes frescos, fogo a sério — e também
+          opções vegetarianas e vegan.
         </p>
-        <ul class="combo__list">
-          <li>✔ Sopa + Prato do Dia + Bebida de copo + Café expresso</li>
-          <li>✔ Sobremesa do dia por +2,00€</li>
-          <li>✔ Também disponível em <strong>Take Away a 9,50€</strong> (sopa + prato)</li>
-        </ul>
-        <div class="combo__price">
-          <span class="combo__new">11,95€</span>
-          <span class="combo__save">Menu completo</span>
+        <div class="hero__cta reveal">
+          <a href="#reservar" class="btn btn--ember btn--lg">Reservar mesa</a>
+          <a href="#ementa" class="btn btn--outline btn--lg">Ver a ementa</a>
         </div>
-        <a href="#reservar" class="btn btn--primary btn--lg">Reservar / Pedir Take Away 🍲</a>
-        <p class="combo__scarcity">🕒 Servido apenas ao almoço — cozinha fecha 30 min antes.</p>
+        <dl class="hero__stats reveal">
+          <div><dt>11,95€</dt><dd>Menu do Dia</dd></div>
+          <div><dt>9,50€</dt><dd>Take Away</dd></div>
+          <div><dt>Seg–Sex</dt><dd>9h — 16h</dd></div>
+        </dl>
       </div>
-      <div class="combo__img" role="img" aria-label="Prato preparado no OMG - Oh My Grill"></div>
+
+      <figure class="hero__photo reveal">
+        <img src="galeria/foto-40.jpeg" alt="Peixe grelhado na brasa, servido no OMG - Oh My Grill" />
+        <figcaption>Peixe grelhado · direto da brasa</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="grate" aria-hidden="true"></div>
+
+  <!-- ===== DESTAQUES DA EMENTA (menu de degustação) ===== -->
+  <section class="section" id="ementa-destaques">
+    <header class="section__head">
+      <span class="kicker reveal">Da nossa ementa</span>
+      <h2 class="section__title reveal">Favoritos da casa</h2>
+    </header>
+
+    <div class="tasting">
+      <div class="tasting__col">
+        <article class="dish reveal">
+          <div class="dish__row"><h3>Hambúrguer OMG</h3><span class="dots" aria-hidden="true"></span><span class="dish__price">14,85€</span></div>
+          <p>Carne de vaca, queijo, bacon, ovo estrelado, pepino em vinagre, maionese de alho e Dijon, cebola caramelizada, batata frita e aros de cebola.</p>
+        </article>
+        <article class="dish reveal">
+          <div class="dish__row"><h3>Bife da Casa</h3><span class="dots" aria-hidden="true"></span><span class="dish__price">19,99€</span></div>
+          <p>Bife da vazia grelhado com tomate e cogumelos assados, salada, aros de cebola e manteiga de alho. Adicione camarão +3,50€.</p>
+        </article>
+        <article class="dish reveal">
+          <div class="dish__row"><h3>Frango Parma</h3><span class="dots" aria-hidden="true"></span><span class="dish__price">12,80€</span></div>
+          <p>Tiras de frango panadas com parmesão e trufa, batata frita e salada mista.</p>
+        </article>
+      </div>
+      <div class="tasting__col">
+        <article class="dish reveal">
+          <div class="dish__row"><h3>Massa de Camarão</h3><span class="dots" aria-hidden="true"></span><span class="dish__price">15,99€</span></div>
+          <p>Massa de tinta de choco com camarão, molho cremoso, espinafres, tomate cereja e rúcula.</p>
+        </article>
+        <article class="dish reveal">
+          <div class="dish__row"><h3>Bitoque à Chef</h3><span class="dots" aria-hidden="true"></span><span class="dish__price">11,50€</span></div>
+          <p>Vaca, frango ou porco com ovo estrelado, batata frita, arroz e salada de alface.</p>
+        </article>
+        <article class="dish dish--veg reveal">
+          <div class="dish__row"><h3>Oh My Vegan <span class="leaf" aria-label="vegan">🌱</span></h3><span class="dots" aria-hidden="true"></span><span class="dish__price">13,50€</span></div>
+          <p>Hambúrguer de soja, queijo vegetal, maionese de abacate, cebola caramelizada, batata frita e aros de cebola.</p>
+        </article>
+      </div>
+    </div>
+    <p class="section__foot reveal"><a href="#ementa" class="link-arrow">Ver a ementa completa →</a></p>
+  </section>
+
+  <!-- ===== MENU DO DIA ===== -->
+  <section class="menudia" id="menu-dia">
+    <div class="menudia__photo" role="img" aria-label="Prato preparado no OMG - Oh My Grill"></div>
+    <div class="menudia__body reveal">
+      <span class="kicker kicker--light">De segunda a sexta</span>
+      <h2 class="menudia__title">Menu do Dia</h2>
+      <p class="menudia__desc">A forma mais fácil — e mais saborosa — de almoçar. Comida de casa, feita na hora, a um preço que faz sorrir.</p>
+      <ul class="menudia__list">
+        <li>Sopa + Prato do Dia + Bebida de copo + Café expresso</li>
+        <li>Sobremesa do dia por <b>+2,00€</b></li>
+        <li>Também em <b>Take Away a 9,50€</b> (sopa + prato)</li>
+      </ul>
+      <div class="menudia__price"><span class="menudia__value">11,95€</span><span class="menudia__note">menu completo</span></div>
+      <a href="#reservar" class="btn btn--ember btn--lg">Reservar / pedir Take Away</a>
+      <p class="menudia__fine">Servido apenas ao almoço — a cozinha fecha 30 min antes.</p>
     </div>
   </section>
 
   <!-- ===== DIFERENCIAIS ===== -->
-  <section class="section" id="diferenciais">
-    <div class="section__head">
-      <span class="eyebrow">Porquê o OMG?</span>
-      <h2>Sabor de casa, feito com cuidado</h2>
-    </div>
-    <div class="features">
-      <div class="feature"><div class="feature__ico">🔥</div><h3>Feito na hora</h3><p>Nada de pré-feitos. Cada prato é preparado no momento, como deve ser.</p></div>
-      <div class="feature"><div class="feature__ico">💶</div><h3>Preço justo</h3><p>Menu do Dia completo a 11,95€ e Take Away a 9,50€. Comer bem sem gastar muito.</p></div>
-      <div class="feature"><div class="feature__ico">🌱</div><h3>Vegetariano &amp; vegan</h3><p>Veggie Bitoque, Bello, Oh My Vegan e Salada César vegetariana. Há para todos.</p></div>
-      <div class="feature"><div class="feature__ico">🥡</div><h3>Take Away</h3><p>Sem tempo para parar? Leve o seu almoço quentinho para onde precisar.</p></div>
+  <section class="section" id="porque">
+    <header class="section__head">
+      <span class="kicker reveal">Porquê o OMG</span>
+      <h2 class="section__title reveal">Fogo, frescura e sabor de casa</h2>
+    </header>
+    <div class="marks">
+      <div class="mark reveal"><span class="mark__ico">🔥</span><h3>Na brasa</h3><p>Carne e peixe grelhados no momento, com o ponto certo e o sabor a fogo.</p></div>
+      <div class="mark reveal"><span class="mark__ico">🌿</span><h3>Fresco todos os dias</h3><p>Nada de pré-feitos. Ingredientes selecionados e cozinha à vista.</p></div>
+      <div class="mark reveal"><span class="mark__ico">🌱</span><h3>Vegetariano &amp; vegan</h3><p>Veggie Bitoque, Bello, Oh My Vegan e Salada César vegetariana.</p></div>
+      <div class="mark reveal"><span class="mark__ico">🥡</span><h3>Take Away</h3><p>Sem tempo para parar? Leve o seu almoço quentinho, a 9,50€.</p></div>
     </div>
   </section>
 
-  <!-- ===== GALERIA (carrossel automático) ===== -->
-  <section class="section" id="galeria">
-    <div class="section__head">
-      <span class="eyebrow">Galeria</span>
-      <h2>Um aperitivo para os olhos</h2>
-      <p class="section__sub">Os nossos pratos e o nosso espaço. As fotos passam sozinhas — ou use as setas.</p>
-    </div>
+  <!-- ===== GALERIA (carrossel cinematográfico) ===== -->
+  <section class="gallery-sec" id="galeria">
+    <header class="section__head">
+      <span class="kicker reveal">Galeria</span>
+      <h2 class="section__title reveal">Um aperitivo para os olhos</h2>
+      <p class="section__sub reveal">As fotos passam sozinhas. Toque, arraste ou use as setas.</p>
+    </header>
 
-    <div class="carousel" id="carousel" aria-roledescription="carrossel" aria-label="Galeria de fotos do OMG - Oh My Grill">
-      <div class="carousel__track" id="carouselTrack"><!-- slides gerados via JS --></div>
-
+    <div class="carousel reveal" id="carousel" aria-roledescription="carrossel" aria-label="Fotos do OMG - Oh My Grill">
+      <div class="carousel__track" id="carouselTrack"></div>
       <button class="carousel__btn carousel__btn--prev" id="carPrev" aria-label="Foto anterior">‹</button>
       <button class="carousel__btn carousel__btn--next" id="carNext" aria-label="Próxima foto">›</button>
-
-      <div class="carousel__counter" id="carCounter">1 / 42</div>
+      <div class="carousel__counter"><span id="carNow">1</span> / 42</div>
+      <div class="carousel__progress"><span id="carBar"></span></div>
       <div class="carousel__dots" id="carDots" aria-hidden="true"></div>
-
       <noscript>
         <div class="gallery-grid">
-          <img src="galeria/foto-01.jpeg" alt="Chef do OMG - Oh My Grill" />
-          <img src="galeria/foto-25.jpeg" alt="Prato do OMG - Oh My Grill" />
-          <img src="galeria/foto-40.jpeg" alt="Peixe grelhado do OMG - Oh My Grill" />
-          <img src="galeria/foto-11.jpeg" alt="Espaço do OMG - Oh My Grill" />
+          <img src="galeria/foto-01.jpeg" alt="Chef do OMG" />
+          <img src="galeria/foto-25.jpeg" alt="Prato do OMG" />
+          <img src="galeria/foto-40.jpeg" alt="Peixe grelhado" />
+          <img src="galeria/foto-11.jpeg" alt="Espaço do restaurante" />
         </div>
       </noscript>
     </div>
   </section>
 
-  <!-- ===== EMENTA COMPLETA (imagem real) ===== -->
-  <section class="section section--alt" id="ementa">
-    <div class="section__head">
-      <span class="eyebrow">Ementa completa</span>
-      <h2>Tudo o que servimos</h2>
-      <p class="section__sub">Tapas, pratos principais, hambúrgueres e menu do dia. Toque para ampliar.</p>
-    </div>
-    <figure class="ementa">
+  <!-- ===== EMENTA COMPLETA ===== -->
+  <section class="section" id="ementa">
+    <header class="section__head">
+      <span class="kicker reveal">Ementa completa</span>
+      <h2 class="section__title reveal">Tudo o que servimos</h2>
+      <p class="section__sub reveal">Tapas, pratos principais, hambúrgueres e menu do dia. Toque para ampliar.</p>
+    </header>
+    <figure class="ementa reveal">
       <a href="assets/menu.jpeg" target="_blank" rel="noopener">
-        <img src="assets/menu.jpeg" alt="Ementa completa do OMG - Oh My Grill: tapas, entradas, pratos principais e hambúrgueres" loading="lazy" />
+        <img src="assets/menu.jpeg" alt="Ementa completa do OMG - Oh My Grill" loading="lazy" />
       </a>
       <figcaption>Dispomos de informação sobre alergénios · Preços com IVA incluído</figcaption>
     </figure>
   </section>
 
   <!-- ===== DEPOIMENTOS ===== -->
-  <!-- NOTA: substituir pelas avaliações reais do Google / Tripadvisor / Facebook dos clientes. -->
-  <section class="section" id="depoimentos">
-    <div class="section__head">
-      <span class="eyebrow">Quem prova, volta</span>
-      <h2>O que dizem os nossos clientes</h2>
-    </div>
-    <div class="testimonials">
-      <figure class="quote">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Menu do dia excelente e sempre bem servido. Comida caseira de qualidade a um preço justo."</blockquote>
-        <figcaption>— Cliente do OMG</figcaption>
-      </figure>
-      <figure class="quote">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Os hambúrgueres são fora de série e ainda têm ótimas opções vegetarianas. Recomendo muito!"</blockquote>
-        <figcaption>— Cliente do OMG</figcaption>
-      </figure>
-      <figure class="quote">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Atendimento simpático e comida feita na hora. Almoço aqui sempre que posso."</blockquote>
-        <figcaption>— Cliente do OMG</figcaption>
-      </figure>
+  <!-- NOTA: substituir pelas avaliações reais do Google / Tripadvisor / Facebook. -->
+  <section class="section section--tint" id="depoimentos">
+    <header class="section__head">
+      <span class="kicker reveal">Quem prova, volta</span>
+      <h2 class="section__title reveal">O que dizem os clientes</h2>
+    </header>
+    <div class="quotes">
+      <figure class="quote reveal"><div class="quote__stars">★★★★★</div><blockquote>Menu do dia excelente e sempre bem servido. Comida caseira de qualidade a um preço justo.</blockquote><figcaption>Cliente do OMG</figcaption></figure>
+      <figure class="quote reveal"><div class="quote__stars">★★★★★</div><blockquote>Os hambúrgueres são fora de série e ainda há ótimas opções vegetarianas. Recomendo muito!</blockquote><figcaption>Cliente do OMG</figcaption></figure>
+      <figure class="quote reveal"><div class="quote__stars">★★★★★</div><blockquote>Atendimento simpático e comida feita na hora. Almoço aqui sempre que posso.</blockquote><figcaption>Cliente do OMG</figcaption></figure>
     </div>
   </section>
 
-  <!-- ===== RESERVAR / TAKE AWAY (form) ===== -->
-  <section class="order" id="reservar">
-    <div class="order__inner">
-      <div class="order__copy">
-        <span class="eyebrow eyebrow--light">Reserve em 30 segundos</span>
-        <h2>Reserve a sua mesa ou peça Take Away</h2>
-        <p>Preencha os campos e finalize diretamente no WhatsApp. Rápido, fácil e sem complicações.</p>
-        <ul class="order__perks">
+  <!-- ===== RESERVAR ===== -->
+  <section class="reservar" id="reservar">
+    <div class="reservar__grid">
+      <div class="reservar__copy reveal">
+        <span class="kicker kicker--light">Reserve em 30 segundos</span>
+        <h2 class="reservar__title">Reserve a mesa ou peça Take&nbsp;Away</h2>
+        <p>Preencha e finalize diretamente no WhatsApp — rápido, fácil, sem complicações.</p>
+        <ul class="reservar__perks">
           <li>🍽️ Reserva de mesa ao almoço</li>
           <li>🥡 Take Away a 9,50€ (sopa + prato)</li>
-          <li>📞 Ou ligue: 964 558 043 / 232 968 488</li>
+          <li>📞 Ou ligue: 964 558 043 · 232 968 488</li>
         </ul>
       </div>
-
-      <form class="order__form" id="orderForm" novalidate>
-        <label>
-          O seu nome
-          <input type="text" name="nome" id="nome" placeholder="Ex: Ana Silva" required />
+      <form class="form reveal" id="orderForm" novalidate>
+        <label>O seu nome
+          <input type="text" id="nome" name="nome" placeholder="Ex: Ana Silva" required />
         </label>
-        <label>
-          O que pretende?
-          <select name="tipo" id="tipo">
+        <label>O que pretende?
+          <select id="tipo" name="tipo">
             <option value="Reserva de mesa">Reservar mesa</option>
             <option value="Take Away">Pedir Take Away</option>
-            <option value="Menu do Dia (Take Away)">Menu do Dia — Take Away (9,50€)</option>
+            <option value="Menu do Dia — Take Away">Menu do Dia — Take Away (9,50€)</option>
           </select>
         </label>
-        <label>
-          Nº de pessoas / dia e hora
-          <input type="text" name="detalhe" id="detalhe" placeholder="Ex: 2 pessoas, hoje às 13h" />
+        <label>Nº de pessoas / dia e hora
+          <input type="text" id="detalhe" name="detalhe" placeholder="Ex: 2 pessoas, hoje às 13h" />
         </label>
-        <button type="submit" class="btn btn--primary btn--lg btn--block">
-          Enviar no WhatsApp 🟢
-        </button>
-        <p class="order__note">Será encaminhado para o nosso WhatsApp (964 558 043).</p>
+        <button type="submit" class="btn btn--ember btn--block btn--lg">Enviar no WhatsApp</button>
+        <p class="form__note">Será encaminhado para o WhatsApp (964 558 043).</p>
       </form>
     </div>
   </section>
 
-  <!-- ===== LOCAL / HORÁRIO / CONTACTO ===== -->
-  <section class="section" id="local">
-    <div class="local">
-      <div class="local__box">
-        <h3>📍 Onde estamos</h3>
+  <!-- ===== CONTACTOS ===== -->
+  <section class="section" id="contactos">
+    <div class="info">
+      <div class="info__box reveal">
+        <h3>Onde estamos</h3>
         <p>Av. Dr. José Augusto Capelo, 32<br>Bloco A, Lj 9<br>3430-056 Carregal do Sal</p>
-        <a class="local__link" href="https://www.google.com/maps/search/?api=1&query=OMG+Oh+My+Grill+Carregal+do+Sal" target="_blank" rel="noopener">Ver no mapa →</a>
+        <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=OMG+Oh+My+Grill+Carregal+do+Sal" target="_blank" rel="noopener">Abrir no mapa →</a>
       </div>
-      <div class="local__box">
-        <h3>🕒 Horário</h3>
-        <p>Segunda a Sexta<br>9h00 às 16h00<br><small>Sábado e Domingo: fechado · Cozinha fecha 30 min antes</small></p>
+      <div class="info__box reveal">
+        <h3>Horário</h3>
+        <p>Segunda a Sexta<br>9h00 — 16h00<br><small>Sáb. e Dom. fechado · cozinha fecha 30 min antes</small></p>
       </div>
-      <div class="local__box">
-        <h3>📱 Contactos</h3>
-        <p>
-          Telemóvel: 964 558 043<br>
-          Fixo: 232 968 488<br>
-          Email: ohmygrillomg@mail.com
-        </p>
-        <p class="local__social">
-          <a href="https://www.instagram.com/omgcarregaldosal" target="_blank" rel="noopener">Instagram</a> ·
+      <div class="info__box reveal">
+        <h3>Contactos</h3>
+        <p>964 558 043<br>232 968 488<br>ohmygrillomg@mail.com</p>
+        <p class="info__social">
+          <a href="https://www.instagram.com/omgcarregaldosal" target="_blank" rel="noopener">Instagram</a>
           <a href="https://www.facebook.com/OMG.carregaldosal" target="_blank" rel="noopener">Facebook</a>
         </p>
       </div>
@@ -294,38 +261,38 @@
   </section>
 
   <!-- ===== FAQ ===== -->
-  <section class="section section--alt" id="faq">
-    <div class="section__head">
-      <span class="eyebrow">Perguntas frequentes</span>
-      <h2>Tudo o que precisa de saber</h2>
-    </div>
+  <section class="section section--tint" id="faq">
+    <header class="section__head">
+      <span class="kicker reveal">Perguntas frequentes</span>
+      <h2 class="section__title reveal">Tudo o que precisa de saber</h2>
+    </header>
     <div class="faq">
-      <details><summary>O que inclui o Menu do Dia?</summary><p>Sopa, prato do dia, bebida de copo e café expresso, por 11,95€. A sobremesa do dia é opcional por mais 2,00€. Disponível de segunda a sexta, ao almoço.</p></details>
-      <details><summary>Fazem Take Away?</summary><p>Sim! O Menu do Dia em Take Away (sopa + prato) fica a 9,50€. Toda a ementa está também disponível para levar.</p></details>
-      <details><summary>Têm opções vegetarianas e vegan?</summary><p>Temos. Experimente o Veggie Bitoque, o hambúrguer Bello, o Oh My Vegan ou a Salada César na versão vegetariana.</p></details>
-      <details><summary>Preciso de reservar?</summary><p>Ao almoço enchemos rápido, por isso recomendamos reservar. Use o formulário acima ou ligue para 964 558 043.</p></details>
+      <details class="reveal"><summary>O que inclui o Menu do Dia?</summary><p>Sopa, prato do dia, bebida de copo e café expresso, por 11,95€. Sobremesa opcional por +2,00€. De segunda a sexta, ao almoço.</p></details>
+      <details class="reveal"><summary>Fazem Take Away?</summary><p>Sim. O Menu do Dia em Take Away (sopa + prato) fica a 9,50€. Toda a ementa está disponível para levar.</p></details>
+      <details class="reveal"><summary>Têm opções vegetarianas e vegan?</summary><p>Temos: Veggie Bitoque, hambúrguer Bello, Oh My Vegan e a Salada César vegetariana.</p></details>
+      <details class="reveal"><summary>Preciso de reservar?</summary><p>Ao almoço enchemos rápido — recomendamos reservar pelo formulário acima ou por 964 558 043.</p></details>
     </div>
   </section>
 
   <!-- ===== CTA FINAL ===== -->
-  <section class="final-cta">
-    <h2>A sua mesa está à espera. 🍽️</h2>
-    <p>Reserve agora e venha provar porque é que dizem "Oh My Grill!".</p>
-    <a href="#reservar" class="btn btn--primary btn--lg">Reservar a minha mesa</a>
+  <section class="finale">
+    <canvas class="finale__embers" id="embers2" aria-hidden="true"></canvas>
+    <div class="finale__inner reveal">
+      <h2>A brasa está acesa.<br>Falta só a sua mesa.</h2>
+      <p>Reserve agora e venha provar porque é que dizem <em>“Oh My Grill!”</em></p>
+      <a href="#reservar" class="btn btn--light btn--lg">Reservar a minha mesa</a>
+    </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== RODAPÉ ===== -->
   <footer class="footer">
     <img src="assets/logo.png" alt="OMG - Oh My Grill" class="footer__logo" />
-    <p>Av. Dr. José Augusto Capelo, 32 · Carregal do Sal · 964 558 043</p>
-    <p>© <span id="year"></span> OMG - Oh My Grill. Todos os direitos reservados.</p>
-    <p class="footer__small">Comer bem nunca foi tão fácil. 🍴</p>
+    <p class="footer__addr">Av. Dr. José Augusto Capelo, 32 · Carregal do Sal · 964 558 043</p>
+    <p class="footer__copy">© <span id="year"></span> OMG · Oh My Grill — Comer bem nunca foi tão fácil.</p>
   </footer>
 
-  <!-- ===== WHATSAPP FLUTUANTE ===== -->
-  <a href="#reservar" class="whatsapp-float" aria-label="Falar no WhatsApp">
-    <span class="whatsapp-float__ico">🟢</span>
-    <span class="whatsapp-float__txt">Reservar no Zap</span>
+  <a href="#reservar" class="wa-float" aria-label="Reservar pelo WhatsApp">
+    <span aria-hidden="true">🟢</span><span class="wa-float__txt">Reservar no Zap</span>
   </a>
 
   <script src="script.js"></script>

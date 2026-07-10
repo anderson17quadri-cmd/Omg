@@ -1,72 +1,57 @@
-# OMG - Oh My Grill · Landing Page de Alta Conversão
+# OMG · Oh My Grill — Landing Page
 
-Landing page estática (HTML + CSS + JS puro, sem dependências) do restaurante
-**OMG - Oh My Grill** (Carregal do Sal, Portugal), otimizada para converter
-visitantes em reservas e pedidos Take Away.
+Landing page de alta conversão do restaurante **OMG - Oh My Grill**
+(Carregal do Sal, Portugal). Site estático, sem dependências de build.
 
-Usa as **fotos reais** do restaurante (logótipo, foto de prato e ementa),
-guardadas em `assets/`.
+Direção de arte **"Brasa"** — uma casa de grelhados editorial, iluminada por
+brasas: fundo carvão quente, tipografia serifada de alto contraste (*Fraunces*)
+com grotesca limpa (*Archivo*), gradiente de fogo como motivo e animações
+subtis (partículas de brasa em canvas, revelações no scroll, micro-interações).
 
 ## 📁 Ficheiros
 
-| Ficheiro        | Descrição                                        |
-|-----------------|--------------------------------------------------|
-| `index.html`    | Estrutura e conteúdo da página                   |
-| `styles.css`    | Estilo visual (tema "carvão + brasa", responsivo)|
-| `script.js`     | Integração do formulário com o WhatsApp          |
-| `assets/logo.png`        | Logótipo oficial                        |
-| `assets/restaurante.jpeg`| Foto de prato (hero + Menu do Dia)      |
-| `assets/menu.jpeg`       | Imagem da ementa completa               |
-| `galeria/foto-01..42.jpeg` | 42 fotos reais da galeria (carrossel) |
+| Ficheiro                  | Descrição                                   |
+|---------------------------|---------------------------------------------|
+| `index.html`              | Estrutura e conteúdo                        |
+| `styles.css`              | Design "Brasa" (tema escuro, responsivo)    |
+| `script.js`               | Brasas em canvas, reveal on scroll, carrossel, formulário |
+| `assets/`                 | Logótipo, foto de prato e ementa            |
+| `galeria/foto-01..42.jpeg`| 42 fotos reais (carrossel)                  |
 
-## 🎠 Galeria em carrossel
-
-A secção **Galeria** mostra as 42 fotos reais do restaurante (pasta `galeria/`)
-num carrossel que **passa sozinho** a cada ~3,8s. Tem setas, contador, pontos de
-navegação, pausa ao passar o rato e suporte a *swipe* no telemóvel. Respeita
-`prefers-reduced-motion` (não roda sozinho para quem prefere menos movimento).
-
-Para adicionar/remover fotos: coloque os ficheiros `foto-NN.jpeg` numerados
-em sequência na pasta `galeria/` e ajuste a constante `TOTAL` no `script.js`.
-
-## 🚀 Como visualizar
-
-Basta abrir o `index.html` no navegador, ou servir a pasta:
+## ▶️ Ver no telemóvel (Termux + navegador)
 
 ```bash
-cd landing-page
+cd ~
+git clone https://github.com/anderson17quadri-cmd/omg.git
+cd omg
 python3 -m http.server 8000
-# acesse http://localhost:8000
 ```
 
-## 🎯 Elementos de conversão incluídos
+Depois abra no navegador do telemóvel: **http://localhost:8000**
 
-- **Barra de urgência** com contador regressivo até o fim do dia
-- **Hero** com proposta de valor clara, prova social e CTA duplo
-- **Faixa de números** (pedidos, nota, tempo de entrega, recompra)
-- **Cardápio destaque** com preços "de/por" (âncora de preço)
-- **Combo em oferta** com escassez ("restam poucas unidades")
-- **Diferenciais**, **depoimentos 5★** e **FAQ** para quebrar objeções
-- **Formulário rápido** que finaliza direto no WhatsApp
-- **Botão flutuante do WhatsApp** sempre visível
-- **CTA final** de reforço
+> As tipografias (Fraunces + Archivo) carregam do Google Fonts; com internet
+> aparecem no telemóvel. Sem internet, caem num fallback elegante (Georgia +
+> system-ui) e o site continua bonito.
 
-## ⚙️ Como personalizar
+## ✨ Destaques do design
 
-1. **Número do WhatsApp** — `WHATSAPP_NUMERO` no topo do `script.js`
-   (já configurado: `351964558043`).
-2. **Morada, horário e contactos** — secção `#local` e `footer` do `index.html`.
-3. **Pratos e preços** — cartões em `#destaques` e opções do `<select>`.
-4. **Fotos** — substitua os ficheiros em `assets/` para atualizar as imagens.
-5. **Avaliações** — troque os depoimentos de exemplo (marcados com um comentário
-   no `index.html`) pelas avaliações reais do Google/Tripadvisor.
-6. **Cores** — variáveis `--ember`, `--gold` etc. no início do `styles.css`.
+- **Hero** com partículas de brasa a subir (canvas) e foto real emoldurada
+- **Ementa em degustação** — nome · · · preço, com linhas pontilhadas
+- **Menu do Dia** em painel dividido com foto e preço em destaque
+- **Galeria** cinematográfica: 42 fotos reais em carrossel automático (setas,
+  contador, barra de progresso, pontos e *swipe*)
+- **Revelações no scroll** escalonadas + micro-interações (hover, brilho de calor)
+- **Formulário → WhatsApp** (351 964 558 043)
+- Acessível: respeita `prefers-reduced-motion`, foco visível, `noscript` de reserva
 
-> Dados usados: Menu do Dia 11,95€ · Take Away 9,50€ · Seg–Sex 9h–16h ·
+## ⚙️ Personalizar
+
+1. **WhatsApp** — `WHATSAPP_NUMERO` no topo do `script.js` (já: `351964558043`)
+2. **Morada / horário / contactos** — secção `#contactos` e rodapé do `index.html`
+3. **Pratos e preços** — blocos `.dish` em `#ementa-destaques`
+4. **Fotos** — substitua os ficheiros em `assets/` e `galeria/`
+5. **Avaliações** — troque os depoimentos (comentário no `index.html`) pelas reais
+6. **Cores** — variáveis `--char`, `--ember`, `--gold`… no início do `styles.css`
+
+> Dados: Menu do Dia 11,95€ · Take Away 9,50€ · Seg–Sex 9h–16h ·
 > 964 558 043 / 232 968 488 · Av. Dr. José Augusto Capelo, 32, Carregal do Sal.
-
-## 📱 Responsivo e acessível
-
-- Layout adaptado para celular, tablet e desktop.
-- Respeita `prefers-reduced-motion`.
-- Marcação semântica com `aria-label` nos pontos-chave.
