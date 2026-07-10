@@ -1,0 +1,269 @@
+/* ============================================================
+   OMG - Oh My Grill · Landing Page de Alta Conversão
+   Carregal do Sal · Paleta carvão + brasa + creme
+   Fotos reais do restaurante em /assets
+   ============================================================ */
+
+:root{
+  --bg:        #0d0d0f;
+  --bg-soft:   #17171b;
+  --surface:   #1e1e24;
+  --line:      #2c2c34;
+  --text:      #f5f2ec;
+  --muted:     #b9b4ab;
+  --ember:     #ff5a1f;
+  --ember-2:   #ff8a00;
+  --gold:      #ffc043;
+  --green:     #25d366;
+  --radius:    16px;
+  --maxw:      1120px;
+  --shadow:    0 20px 45px rgba(0,0,0,.45);
+  --font: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--text);
+  line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em}
+section{scroll-margin-top:90px}
+
+/* ---------- Botões ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-weight:700;border-radius:999px;cursor:pointer;border:0;
+  transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  padding:.8rem 1.4rem;font-size:1rem;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn--primary{background:linear-gradient(135deg,var(--ember),var(--ember-2));color:#1a1204;box-shadow:0 10px 25px rgba(255,90,31,.35)}
+.btn--primary:hover{filter:brightness(1.05);box-shadow:0 14px 30px rgba(255,90,31,.5)}
+.btn--ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+.btn--ghost:hover{border-color:var(--ember)}
+.btn--lg{padding:1rem 1.8rem;font-size:1.1rem}
+.btn--sm{padding:.55rem 1.1rem;font-size:.9rem}
+.btn--block{width:100%}
+
+.eyebrow{display:inline-block;text-transform:uppercase;letter-spacing:.15em;font-size:.78rem;font-weight:800;color:var(--ember-2);margin-bottom:.6rem}
+.eyebrow--light{color:var(--gold)}
+
+/* ---------- Topbar ---------- */
+.topbar{
+  background:linear-gradient(90deg,#3a1206,#5a1a08);color:#ffe9d6;text-align:center;
+  font-size:.9rem;padding:.6rem 1rem;display:flex;gap:.4rem;justify-content:center;
+  align-items:center;flex-wrap:wrap;border-bottom:1px solid rgba(255,138,0,.25);
+}
+.topbar strong{color:var(--gold)}
+.topbar__pulse{animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+
+/* ---------- Header ---------- */
+.header{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.5rem;
+  padding:.6rem clamp(1rem,4vw,2.5rem);
+  background:rgba(13,13,15,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+}
+.header.scrolled{box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.brand{margin-right:auto;display:flex;align-items:center}
+.brand__logo{height:52px;width:auto;border-radius:50%;background:#fff;padding:2px}
+.nav{display:flex;gap:1.4rem}
+.nav a{color:var(--muted);font-weight:600;font-size:.95rem;transition:color .15s}
+.nav a:hover{color:var(--text)}
+.brand__mark{font-weight:900}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;min-height:86vh;display:flex;align-items:center;
+  padding:4rem clamp(1rem,5vw,3rem);
+  background-image:url('assets/restaurante.jpeg');
+  background-size:cover;background-position:center;
+}
+.hero__overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,12,.95) 0%,rgba(10,10,12,.82) 45%,rgba(10,10,12,.45) 100%)}
+.hero__content{position:relative;max-width:640px}
+.badge{display:inline-block;background:rgba(255,192,67,.14);color:var(--gold);border:1px solid rgba(255,192,67,.35);border-radius:999px;padding:.4rem .9rem;font-size:.82rem;font-weight:700;margin-bottom:1.2rem}
+.hero__title{font-size:clamp(2.3rem,6vw,4rem);font-weight:900;margin-bottom:1rem}
+.hero__title .hl{background:linear-gradient(135deg,var(--ember),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero__lead{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--muted);max-width:35rem;margin-bottom:1.8rem}
+.hero__lead strong{color:var(--gold)}
+.hero__actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.hero__trust{list-style:none;display:flex;gap:1.4rem;flex-wrap:wrap;font-size:.92rem;color:var(--muted)}
+
+/* ---------- Proof strip ---------- */
+.proof{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+  max-width:var(--maxw);margin:-2.5rem auto 0;position:relative;z-index:5;
+  padding:1.6rem clamp(1rem,4vw,2rem);background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);width:calc(100% - 2rem);
+}
+.proof__item{text-align:center;display:flex;flex-direction:column}
+.proof__item b{font-size:clamp(1.4rem,3vw,2rem);color:var(--gold);font-weight:900}
+.proof__item span{font-size:.82rem;color:var(--muted)}
+
+/* ---------- Sections base ---------- */
+.section{max-width:var(--maxw);margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1rem,4vw,2rem)}
+.section--alt{max-width:none;background:var(--bg-soft);margin-top:2rem}
+.section--alt > *{max-width:var(--maxw);margin-inline:auto}
+.section__head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+.section__head h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900}
+.section__sub{color:var(--muted);margin-top:.7rem}
+
+/* ---------- Pratos (destaques, sem foto) ---------- */
+.dishes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem}
+.dish{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.5rem;display:flex;flex-direction:column;gap:.7rem;position:relative;
+  border-left:4px solid var(--ember);transition:transform .2s ease,border-color .2s ease;
+}
+.dish:hover{transform:translateY(-5px)}
+.dish--star{border-left-color:var(--gold)}
+.dish--veg{border-left-color:#4caf50}
+.dish__top{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem}
+.dish__top h3{font-size:1.25rem}
+.dish .tag{font-size:.72rem;font-weight:800;color:var(--gold);white-space:nowrap;background:rgba(255,192,67,.12);padding:.25rem .6rem;border-radius:999px}
+.dish p{color:var(--muted);font-size:.92rem;flex:1}
+.dish .price{font-weight:900;font-size:1.35rem;color:var(--text)}
+
+/* ---------- Menu do Dia (oferta) ---------- */
+.combo{padding:clamp(2rem,5vw,4rem) clamp(1rem,4vw,2rem);max-width:var(--maxw);margin:0 auto}
+.combo__card{
+  display:grid;grid-template-columns:1.1fr .9fr;background:linear-gradient(135deg,#20140a,#2a1206);
+  border:1px solid rgba(255,138,0,.3);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);
+}
+.combo__left{padding:clamp(1.8rem,4vw,3rem)}
+.combo__left h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:.7rem}
+.combo__desc{color:var(--muted);margin-bottom:1rem}
+.combo__list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem;color:#e8e2d6}
+.combo__list strong{color:var(--gold)}
+.combo__price{display:flex;flex-direction:column;margin-bottom:1.4rem}
+.combo__new{font-size:2.6rem;font-weight:900;color:var(--gold);line-height:1.1}
+.combo__save{color:var(--green);font-weight:700;font-size:.9rem}
+.combo__scarcity{margin-top:.9rem;font-size:.85rem;color:#ffb08a}
+.combo__img{background-image:url('assets/restaurante.jpeg');background-size:cover;background-position:center;min-height:300px}
+
+/* ---------- Features ---------- */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem}
+.feature{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;text-align:center;transition:border-color .2s}
+.feature:hover{border-color:rgba(255,90,31,.4)}
+.feature__ico{font-size:2rem;margin-bottom:.6rem}
+.feature h3{font-size:1.1rem;margin-bottom:.4rem}
+.feature p{color:var(--muted);font-size:.92rem}
+
+/* ---------- Galeria / Carrossel ---------- */
+.carousel{
+  position:relative;max-width:960px;margin:0 auto;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow);background:#000;
+}
+.carousel__track{display:flex;transition:transform .6s cubic-bezier(.4,.0,.2,1);will-change:transform}
+.slide{min-width:100%;height:clamp(320px,55vw,520px);position:relative}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.carousel__btn{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(13,13,15,.6);color:#fff;font-size:1.8rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);transition:background .15s,transform .15s;
+}
+.carousel__btn:hover{background:var(--ember);transform:translateY(-50%) scale(1.08)}
+.carousel__btn--prev{left:14px}
+.carousel__btn--next{right:14px}
+.carousel__counter{
+  position:absolute;top:14px;right:14px;z-index:3;
+  background:rgba(13,13,15,.65);color:#fff;font-size:.82rem;font-weight:700;
+  padding:.3rem .7rem;border-radius:999px;backdrop-filter:blur(4px);
+  font-variant-numeric:tabular-nums;
+}
+.carousel__dots{
+  position:absolute;bottom:12px;left:0;right:0;z-index:3;
+  display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:0 3rem;
+}
+.carousel__dots button{
+  width:8px;height:8px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.4);transition:background .2s,transform .2s;
+}
+.carousel__dots button.is-active{background:var(--gold);transform:scale(1.4)}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.gallery-grid img{width:100%;height:220px;object-fit:cover}
+@media (max-width:480px){
+  .carousel__dots{display:none}
+  .carousel__btn{width:38px;height:38px;font-size:1.5rem}
+}
+
+/* ---------- Ementa (imagem real) ---------- */
+.ementa{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.ementa a{display:block;max-width:820px;width:100%;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .2s}
+.ementa a:hover{transform:scale(1.01)}
+.ementa img{width:100%;height:auto;background:#fff}
+.ementa figcaption{color:var(--muted);font-size:.85rem;text-align:center}
+
+/* ---------- Testimonials ---------- */
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;display:flex;flex-direction:column;gap:.7rem}
+.stars{color:var(--gold);letter-spacing:.15em}
+.quote blockquote{font-size:1rem;color:var(--text)}
+.quote figcaption{color:var(--muted);font-weight:700;font-size:.9rem}
+
+/* ---------- Order / Form ---------- */
+.order{background:linear-gradient(135deg,#1a0f06,#2a1206);padding:clamp(3rem,7vw,5.5rem) clamp(1rem,4vw,2rem)}
+.order__inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center}
+.order__copy h2{font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:900;margin-bottom:.8rem}
+.order__copy p{color:var(--muted);margin-bottom:1.2rem}
+.order__perks{list-style:none;display:flex;flex-direction:column;gap:.5rem;color:#e8e2d6;font-weight:600}
+.order__form{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.8rem;display:flex;flex-direction:column;gap:1rem;box-shadow:var(--shadow)}
+.order__form label{display:flex;flex-direction:column;gap:.4rem;font-size:.88rem;font-weight:700;color:var(--muted)}
+.order__form input,.order__form select{background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:.85rem 1rem;color:var(--text);font-size:1rem;font-family:inherit;transition:border-color .15s}
+.order__form input:focus,.order__form select:focus{outline:none;border-color:var(--ember)}
+.order__form input::placeholder{color:#6f6a62}
+.order__note{font-size:.78rem;color:var(--muted);text-align:center}
+
+/* ---------- Local ---------- */
+.local{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.local__box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem}
+.local__box h3{margin-bottom:.6rem;font-size:1.15rem}
+.local__box p{color:var(--muted)}
+.local__box small{color:#8a857c}
+.local__link,.local__social a{color:var(--ember-2);font-weight:700;font-size:.9rem;display:inline-block;margin-top:.6rem}
+.local__social a{margin-right:.3rem}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.3rem;transition:border-color .2s}
+.faq details[open]{border-color:rgba(255,90,31,.4)}
+.faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq summary::after{content:"+";color:var(--ember-2);font-size:1.4rem;font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq details p{color:var(--muted);margin-top:.7rem;font-size:.95rem}
+
+/* ---------- Final CTA ---------- */
+.final-cta{text-align:center;padding:clamp(3.5rem,8vw,6rem) 1.5rem;background:linear-gradient(135deg,var(--ember),var(--ember-2));color:#1a1204}
+.final-cta h2{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;max-width:20ch;margin:0 auto .6rem}
+.final-cta p{font-size:1.1rem;margin-bottom:1.6rem;opacity:.85}
+.final-cta .btn--primary{background:#1a1204;color:var(--gold);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--bg);text-align:center;padding:2.5rem 1.5rem;border-top:1px solid var(--line);color:var(--muted)}
+.footer__logo{height:64px;width:auto;margin:0 auto .8rem;border-radius:50%;background:#fff;padding:3px}
+.footer__small{font-size:.85rem;margin-top:.4rem;color:#7a756c}
+
+/* ---------- WhatsApp float ---------- */
+.whatsapp-float{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:var(--green);color:#04240f;font-weight:800;display:flex;align-items:center;gap:.5rem;padding:.85rem 1.2rem;border-radius:999px;box-shadow:0 12px 30px rgba(37,211,102,.45);transition:transform .15s}
+.whatsapp-float:hover{transform:translateY(-3px) scale(1.03)}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:860px){
+  .nav{display:none}
+  .combo__card{grid-template-columns:1fr}
+  .combo__img{order:-1;min-height:220px}
+  .order__inner{grid-template-columns:1fr}
+  .proof{grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  .hero{min-height:auto}
+}
+@media (max-width:480px){
+  .hero__trust{flex-direction:column;gap:.4rem}
+  .whatsapp-float__txt{display:none}
+  .whatsapp-float{padding:.9rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;scroll-behavior:auto}}
