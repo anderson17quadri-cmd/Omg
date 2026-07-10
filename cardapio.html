@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardápio · OMG - Oh My Grill | Carregal do Sal</title>
+  <meta name="description" content="O cardápio completo do OMG - Oh My Grill com fotos: tapas, pratos na brasa, hambúrgueres artesanais e o Menu do Dia a 11,95€." />
+  <meta name="theme-color" content="#17110d" />
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ---- Cardápio (fotos) ---- */
+    .cardapio-hero{position:relative;text-align:center;padding:clamp(2.5rem,6vw,4.5rem) 1.2rem 0}
+    .cardapio-hero h1{font-family:var(--serif);font-size:clamp(2.4rem,7vw,4.2rem);font-weight:900;letter-spacing:-.02em}
+    .cardapio-hero .hl{background:var(--grad-ember);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .cardapio-hero p{color:var(--smoke);max-width:32rem;margin:.8rem auto 0}
+    .heroband{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;max-width:var(--maxw);margin:clamp(1.5rem,4vw,2.5rem) auto 0;padding:0 clamp(1rem,4vw,2rem)}
+    .heroband img{width:100%;height:clamp(140px,20vw,230px);object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+
+    .cat{max-width:var(--maxw);margin:0 auto;padding:clamp(2.6rem,6vw,4.5rem) clamp(1rem,4vw,2rem) 0}
+    .cat__head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.6rem;padding-bottom:.7rem;border-bottom:1px solid var(--line);position:relative}
+    .cat__head::before{content:"";position:absolute;left:0;bottom:-1px;width:70px;height:2px;background:var(--grad-ember)}
+    .cat__head h2{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;color:var(--gold)}
+    .cat__en{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke-dim)}
+
+    .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.3rem}
+    .pcard{background:var(--char-2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease,border-color .25s ease}
+    .pcard:hover{transform:translateY(-6px);border-color:rgba(255,157,47,.45)}
+    .pcard__img{position:relative;height:190px;overflow:hidden}
+    .pcard__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+    .pcard:hover .pcard__img img{transform:scale(1.06)}
+    .pcard__veg{position:absolute;top:.6rem;left:.6rem;background:rgba(15,10,6,.72);color:#9fd67a;font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:999px;backdrop-filter:blur(4px)}
+    .pcard__body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+    .pcard__row{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}
+    .pcard__name{font-family:var(--serif);font-weight:600;font-size:1.18rem}
+    .pcard__price{font-family:var(--serif);font-weight:900;font-size:1.15rem;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+    .pcard__desc{color:var(--smoke);font-size:.86rem;line-height:1.5;flex:1}
+    .pcard__desc em{color:var(--flame);font-style:italic}
+
+    .tapas{display:grid;grid-template-columns:1.15fr .85fr;gap:1.6rem;align-items:start}
+    .tapas__list{display:grid;grid-template-columns:1fr 1fr;gap:0 1.6rem}
+    .tapas__item{padding:.7rem 0;border-bottom:1px dashed rgba(255,207,107,.12)}
+    .tapas__row{display:flex;align-items:baseline;gap:.5rem}
+    .tapas__name{font-family:var(--serif);font-weight:600;font-size:1rem}
+    .tapas__name .veg{font-size:.8rem}
+    .tapas__price{font-family:var(--serif);font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+    .tapas__en{color:var(--smoke-dim);font-size:.78rem}
+    .tapas__banner{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);position:sticky;top:5rem}
+    .tapas__banner img{width:100%;height:100%;min-height:280px;object-fit:cover}
+
+    .backbar{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:.7rem clamp(1rem,4vw,2rem);position:sticky;top:0;z-index:50;background:rgba(23,17,13,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .backbar a.back{color:var(--smoke);font-weight:600;font-size:.92rem}
+    .backbar a.back:hover{color:var(--gold)}
+    .backbar .brand__logo{height:46px}
+
+    @media (max-width:640px){
+      .heroband{grid-template-columns:1fr 1fr}
+      .heroband img:first-child{grid-column:1/-1;height:200px}
+      .tapas{grid-template-columns:1fr}
+      .tapas__banner{position:static;order:-1}
+      .tapas__banner img{min-height:200px}
+      .tapas__list{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <a href="index.html" class="back">← Voltar ao site</a>
+    <a href="index.html" aria-label="OMG - Oh My Grill"><img src="assets/logo.png" alt="OMG - Oh My Grill" class="brand__logo" /></a>
+    <a class="btn btn--ember btn--sm" href="https://wa.me/351964558043?text=Ol%C3%A1%2C%20OMG!%20Quero%20fazer%20uma%20reserva." target="_blank" rel="noopener">Reservar</a>
+  </div>
+
+  <section class="cardapio-hero">
+    <span class="kicker" style="padding-left:0">🔥 Carregal do Sal</span>
+    <h1>O nosso <span class="hl">cardápio</span></h1>
+    <p>Feito na hora, na brasa e com ingredientes frescos. Espreite prato a prato.</p>
+    <div class="heroband">
+      <img src="galeria/foto-40.jpeg" alt="Peixe grelhado na brasa" loading="eager" />
+      <img src="galeria/foto-27.jpeg" alt="Hambúrguer OMG" loading="eager" />
+      <img src="galeria/foto-29.jpeg" alt="Salada César" loading="eager" />
+    </div>
+  </section>
+
+  <!-- TAPAS & ENTRADAS -->
+  <section class="cat">
+    <div class="cat__head"><h2>Tapas &amp; Entradas</h2><span class="cat__en">Starters</span></div>
+    <div class="tapas">
+      <div class="tapas__list">
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Couvert</span><span class="dots"></span><span class="tapas__price">2,80€</span></div><span class="tapas__en">Tostinhas, manteiga e azeitonas</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Pão de manteiga de alho</span><span class="dots"></span><span class="tapas__price">3,50€</span></div><span class="tapas__en">Garlic bread</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Pão de alho e queijo</span><span class="dots"></span><span class="tapas__price">4,20€</span></div><span class="tapas__en">Cheesy garlic bread</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Pimentos Padrón <span class="veg">🌱</span></span><span class="dots"></span><span class="tapas__price">3,60€</span></div><span class="tapas__en">Roasted Padrón peppers</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Húmus de beringela <span class="veg">🌱</span></span><span class="dots"></span><span class="tapas__price">3,95€</span></div><span class="tapas__en">Aubergine hummus, crostinis</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Aros de cebola panados <span class="veg">🌱</span></span><span class="dots"></span><span class="tapas__price">4,40€</span></div><span class="tapas__en">Battered onion rings</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Asas de frango teriyaki</span><span class="dots"></span><span class="tapas__price">4,40€</span></div><span class="tapas__en">Chicken wings, teriyaki &amp; seeds</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Nuggets de frango</span><span class="dots"></span><span class="tapas__price">4,50€</span></div><span class="tapas__en">Chicken nuggets, sweet chili</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Argolas de lula panadas</span><span class="dots"></span><span class="tapas__price">4,40€</span></div><span class="tapas__en">Squid rings, herb mayo</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Tempura de peixe</span><span class="dots"></span><span class="tapas__price">4,50€</span></div><span class="tapas__en">Tempura fish, gribiche</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Tempura de camarão</span><span class="dots"></span><span class="tapas__price">5,50€</span></div><span class="tapas__en">Tempura prawns, sweet chili</span></div>
+        <div class="tapas__item"><div class="tapas__row"><span class="tapas__name">Queijo Brie panado</span><span class="dots"></span><span class="tapas__price">4,00€</span></div><span class="tapas__en">Brie fritters, spicy ketchup</span></div>
+      </div>
+      <figure class="tapas__banner"><img src="galeria/foto-10.jpeg" alt="Seleção de tapas do OMG - Oh My Grill" loading="lazy" /></figure>
+    </div>
+  </section>
+
+  <!-- PRATOS PRINCIPAIS -->
+  <section class="cat">
+    <div class="cat__head"><h2>Pratos Principais</h2><span class="cat__en">Mains</span></div>
+    <div class="pgrid">
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-34.jpeg" alt="Bife da Casa" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Bife da Casa</span><span class="pcard__price">19,99€</span></div><p class="pcard__desc">Bife da vazia grelhado, tomate e cogumelos assados, salada, aros de cebola, manteiga de alho e batata frita c/ óleo de trufa e parmesão. <em>Adicione camarão +3,50€.</em></p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-19.jpeg" alt="Costeletas de Borrego" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Costeletas de Borrego</span><span class="pcard__price">16,85€</span></div><p class="pcard__desc">C/ batatas salteadas, húmus de beringela e salada mista.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-17.jpeg" alt="Frango Parma" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Frango Parma</span><span class="pcard__price">12,80€</span></div><p class="pcard__desc">Tiras de frango panadas c/ parmesão e trufa, batata frita e salada mista.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-33.jpeg" alt="Bitoque à Chef" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Bitoque à Chef</span><span class="pcard__price">11,50€</span></div><p class="pcard__desc">Vaca, frango ou porco c/ ovo estrelado, batata frita, arroz e salada de alface.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-42.jpeg" alt="Veggie Bitoque" loading="lazy" /><span class="pcard__veg">🌱 Vegetariano</span></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Veggie Bitoque</span><span class="pcard__price">12,50€</span></div><p class="pcard__desc">Panado de "frango" vegetariano c/ ovo estrelado, batata frita, arroz e salada.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-30.jpeg" alt="Massa de Camarão" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Massa de Camarão</span><span class="pcard__price">15,99€</span></div><p class="pcard__desc">Massa de tinta de choco c/ camarão, molho cremoso, espinafres, tomate cereja e rúcula.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-24.jpeg" alt="Camarão ao Estilo da Casa" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Camarão ao Estilo da Casa</span><span class="pcard__price">11,50€</span></div><p class="pcard__desc">Camarão panado, batata frita, salada e molho de maionese e alho.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-21.jpeg" alt="Fish & Chips" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Fish &amp; Chips</span><span class="pcard__price">11,99€</span></div><p class="pcard__desc">Filete de peixe panado, batata frita, molho gribiche e ervilhas.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-29.jpeg" alt="Salada César" loading="lazy" /><span class="pcard__veg">🌱 Opção veg.</span></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Salada César</span><span class="pcard__price">10,50€</span></div><p class="pcard__desc">Alface, molho César, parmesão, lardons de bacon, anchovas, crostinis e ovo cozido. <em>Adicione camarão ou frango +3,50€.</em></p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- HAMBÚRGUERES -->
+  <section class="cat">
+    <div class="cat__head"><h2>Hambúrgueres</h2><span class="cat__en">Burgers</span></div>
+    <div class="pgrid">
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-27.jpeg" alt="Hambúrguer OMG" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">OMG</span><span class="pcard__price">14,85€</span></div><p class="pcard__desc">Vaca, queijo, bacon, ovo estrelado, alface, tomate, pepino em vinagre, maionese de alho e Dijon, cebola caramelizada, batata frita e aros de cebola.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-41.jpeg" alt="Hambúrguer de Frango & Chouriço" loading="lazy" /></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Frango &amp; Chouriço</span><span class="pcard__price">13,85€</span></div><p class="pcard__desc">Frango e chouriço grelhado, alface, tomate, pepino em vinagre, maioneses, cebola caramelizada, batata frita e aros de cebola.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-16.jpeg" alt="Hambúrguer Bello com Portobello" loading="lazy" /><span class="pcard__veg">🌱 Vegetariano</span></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Bello</span><span class="pcard__price">13,65€</span></div><p class="pcard__desc">Cogumelo Portobello assado, queijo, ovo estrelado, alface, tomate, pepino em vinagre, maioneses, cebola caramelizada, batata frita e aros de cebola.</p></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__img"><img src="galeria/foto-35.jpeg" alt="Oh My Vegan" loading="lazy" /><span class="pcard__veg">🌱 Vegan</span></div>
+        <div class="pcard__body"><div class="pcard__row"><span class="pcard__name">Oh My Vegan</span><span class="pcard__price">13,50€</span></div><p class="pcard__desc">Hambúrguer de soja, queijo vegetal, alface, tomate, pepino em vinagre, maionese de abacate, cebola caramelizada, batata frita e aros de cebola.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- MENU DO DIA -->
+  <section class="cat">
+    <div class="menudia" style="border-radius:calc(var(--radius) + 6px);overflow:hidden;border:1px solid rgba(255,157,47,.3)">
+      <div class="menudia__photo" style="background-image:url('galeria/foto-34.jpeg')"></div>
+      <div class="menudia__body">
+        <span class="kicker kicker--light">De segunda a sexta · ao almoço</span>
+        <h2 class="menudia__title">Menu do Dia</h2>
+        <ul class="menudia__list">
+          <li>Sopa + Prato do Dia + Bebida de copo + Café expresso</li>
+          <li>Sobremesa do dia por <b>+2,00€</b></li>
+          <li>Em <b>Take Away a 9,50€</b> (sopa + prato)</li>
+        </ul>
+        <div class="menudia__price"><span class="menudia__value">11,95€</span><span class="menudia__note">menu completo</span></div>
+        <a href="https://wa.me/351964558043?text=Ol%C3%A1%2C%20OMG!%20Quero%20reservar%2Fpedir%20o%20Menu%20do%20Dia." target="_blank" rel="noopener" class="btn btn--ember btn--lg">Reservar / pedir 🍲</a>
+      </div>
+    </div>
+    <p class="menu-sauces" style="margin-top:1.6rem">Molhos — ketchup 0,30€ · maionese 0,50€ · maionese de alho 0,70€ · gribiche 0,70€ · manteiga de alho 1€</p>
+    <p class="menu-foot" style="text-align:center">Dispomos de informação sobre alergénios · Preços com IVA incluído</p>
+  </section>
+
+  <footer class="footer">
+    <img src="assets/logo.png" alt="OMG - Oh My Grill" class="footer__logo" />
+    <p class="footer__addr">Av. Dr. José Augusto Capelo, 32 · Carregal do Sal · 964 558 043</p>
+    <p class="footer__copy">© <span id="year"></span> OMG · Oh My Grill — Comer bem nunca foi tão fácil.</p>
+  </footer>
+
+  <a href="https://wa.me/351964558043?text=Ol%C3%A1%2C%20OMG!%20Quero%20fazer%20uma%20reserva." target="_blank" rel="noopener" class="wa-float" aria-label="Reservar pelo WhatsApp">
+    <span aria-hidden="true">🟢</span><span class="wa-float__txt">Reservar no Zap</span>
+  </a>
+
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>

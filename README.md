@@ -12,7 +12,8 @@ subtis (partículas de brasa em canvas, revelações no scroll, micro-interaçõ
 
 | Ficheiro                  | Descrição                                   |
 |---------------------------|---------------------------------------------|
-| `index.html`              | Estrutura e conteúdo                        |
+| `index.html`              | Landing page (estrutura e conteúdo)         |
+| `cardapio.html`           | Cardápio visual com as fotos reais de cada prato |
 | `styles.css`              | Design "Brasa" (tema escuro, responsivo)    |
 | `script.js`               | Brasas em canvas, reveal on scroll, carrossel, formulário |
 | `assets/`                 | Logótipo, foto de prato e ementa            |
