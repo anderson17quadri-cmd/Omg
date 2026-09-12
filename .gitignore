@@ -1,0 +1,6 @@
+# Artefatos de build do app Android (baixados do GitHub Actions)
+*.apk
+*.aab
+
+# Dependencias
+node_modules/
