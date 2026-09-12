@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Fora do Loop</string>
+    <string name="title_activity_main">Fora do Loop</string>
+    <string name="package_name">com.andersondev.foradoloop</string>
+    <string name="custom_url_scheme">com.andersondev.foradoloop</string>
+</resources>

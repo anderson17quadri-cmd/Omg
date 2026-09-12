@@ -1,0 +1,6 @@
+{
+  "appId": "com.andersondev.foradoloop",
+  "appName": "Fora do Loop",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
