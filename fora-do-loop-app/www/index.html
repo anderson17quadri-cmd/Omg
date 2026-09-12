@@ -226,19 +226,14 @@
     transform:rotate(-2deg);
   }
   .word{font-size:42px;font-weight:900;letter-spacing:-1.6px;line-height:1.05;margin:0;word-break:break-word;}
+  .word-what{
+    background:var(--gold-wash);border:2px solid var(--ink);border-radius:var(--r-sm);
+    padding:12px 14px;margin:18px 0 0;font-size:14.5px;line-height:1.5;
+    font-weight:700;text-align:left;animation:pop .28s cubic-bezier(.34,1.56,.64,1);
+  }
   .word-note{color:var(--ink-soft);font-size:14px;margin:18px 0 0;line-height:1.5;font-weight:600;}
   .out-big{font-size:31px;font-weight:900;color:var(--red-deep);letter-spacing:-1px;margin:0 0 14px;line-height:1.05;}
   .out-note{color:var(--ink-soft);font-size:14.5px;line-height:1.55;margin:0;font-weight:600;}
-
-  .hold{
-    width:100%;background:var(--paper-2);color:var(--ink);border:var(--bw) solid var(--ink);
-    padding:17px;border-radius:var(--r-md);font-size:17px;font-weight:900;
-    font-family:inherit;cursor:pointer;position:relative;overflow:hidden;
-    user-select:none;-webkit-user-select:none;touch-action:none;box-shadow:var(--pop);
-  }
-  .hold .fill{position:absolute;inset:0 auto 0 0;width:0%;background:var(--gold);transition:width .07s linear;}
-  .hold .lbl{position:relative;z-index:1;}
-  .hold.armed{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink);}
 
   /* ---------- perguntas ---------- */
   .qbox{
@@ -401,8 +396,8 @@
     <h1>Como jogar</h1>
     <p class="sub">Uma rodada leva de 5 a 10 minutos.</p>
     <div class="card">
-      <div class="step"><div class="step-n">1</div><div class="step-t">O celular passa de mão em mão. Todos veem a mesma <b>palavra secreta</b> — menos um, que só vê a categoria. Esse é o <b>infiltrado</b>.</div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-t">O app sorteia os pares: <b>cada jogador lê uma pergunta</b> para outro, que responde em voz alta. Todo mundo pergunta uma vez e responde uma vez.</div></div>
+      <div class="step"><div class="step-n">1</div><div class="step-t">O celular passa de mão em mão. Todos veem a mesma <b>palavra secreta</b> — menos um, que só vê a categoria. Esse é o <b>infiltrado</b>. Não conhece a palavra? Toque em <b>“não sei o que é isso”</b> na carta.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-t">O app sorteia os pares: <b>cada jogador lê uma pergunta</b> para outro, que responde em voz alta. São <b>2 voltas</b> por padrão, então cada um responde duas vezes — dá tempo de desconfiar de alguém.</div></div>
       <div class="step"><div class="step-n">3</div><div class="step-t">Quem sabe a palavra precisa provar que sabe — <b>sem entregar</b> pros outros. Quem está fora precisa inventar uma resposta que cole.</div></div>
       <div class="step"><div class="step-n">4</div><div class="step-t">Depois todo mundo <b>vota em segredo</b> em quem acha que é o infiltrado.</div></div>
       <div class="step"><div class="step-n">5</div><div class="step-t">Se o infiltrado for pego, ele ainda tem <b>uma chance de chutar a palavra</b>. Se acertar, o esforço do grupo <b>vira pó</b>.</div></div>
@@ -442,6 +437,11 @@
     <div class="set-block">
       <div class="set-label"><span>Rodadas</span></div>
       <div class="chips" id="set-rounds"></div>
+    </div>
+
+    <div class="set-block">
+      <div class="set-label"><span>Voltas de pergunta</span><small id="qr-note"></small></div>
+      <div class="chips" id="set-qrounds"></div>
     </div>
 
     <div class="set-block">
@@ -505,8 +505,9 @@
           <div class="t">Segure o botão abaixo<br>para ver sua carta</div>
         </div>
       </div>
-      <button class="hold" id="hold-btn"><span class="fill" id="hold-fill"></span><span class="lbl" id="hold-lbl">Segure para revelar</span></button>
-      <button class="btn" id="rev-next" style="display:none;" onclick="nextPass()">Já vi, passar adiante</button>
+      <button class="btn" id="show-btn" onclick="showSecret()">Ver minha carta</button>
+      <button class="btn secondary" id="what-btn" style="display:none;" onclick="explainWord()">🤔 Não sei o que é isso</button>
+      <button class="btn" id="rev-next" style="display:none;" onclick="nextPass()">Já vi, esconder e passar</button>
       <div class="tip" id="rev-tip" style="display:none;"><span class="tip-ico">💡</span><span class="tip-tx" id="rev-tip-tx"></span></div>
     </div>
   </div>
@@ -635,6 +636,188 @@ const BANK = {
   "Monstros":    ["vampiro","zumbi","lobisomem","fantasma","bruxa","múmia","saci","curupira","dragão","alienígena","palhaço assassino","boitatá"]
 };
 
+/* ============ O QUE É CADA PALAVRA (pra quem não conhece) ============ */
+const WHATIS = {
+  "pizza":"Massa redonda assada com queijo e recheio por cima, cortada em fatias.",
+  "sushi":"Comida japonesa de arroz temperado com peixe cru, geralmente em rolinhos.",
+  "feijoada":"Feijão preto cozido com carnes de porco, servido com arroz e couve.",
+  "hambúrguer":"Carne moída em disco dentro de um pão redondo.",
+  "sorvete":"Doce gelado e cremoso, servido em bola, casquinha ou pote.",
+  "pastel":"Massa fina frita com recheio dentro, típica de feira.",
+  "churrasco":"Carne assada na brasa, no espeto ou na grelha.",
+  "pipoca":"Milho que estoura no calor e vira floquinho branco.",
+  "lasanha":"Camadas de massa com molho, queijo e recheio, assadas no forno.",
+  "brigadeiro":"Docinho de chocolate com leite condensado, enrolado em granulado.",
+  "açaí":"Creme roxo e gelado de uma fruta da Amazônia.",
+  "coxinha":"Salgado frito em forma de gota, recheado de frango.",
+  "leão":"Felino grande e amarelado; o macho tem juba.",
+  "pinguim":"Ave preta e branca que não voa e vive no frio.",
+  "tubarão":"Peixe grande e predador, com barbatana nas costas.",
+  "coelho":"Bichinho peludo de orelhas compridas que pula.",
+  "elefante":"Animal enorme e cinza, com tromba e orelhas grandes.",
+  "morcego":"Único mamífero que voa; sai à noite e dorme de cabeça pra baixo.",
+  "tartaruga":"Réptil lento que carrega um casco nas costas.",
+  "polvo":"Bicho do mar mole, com oito tentáculos.",
+  "girafa":"Animal africano de pescoço muito comprido e manchas.",
+  "coruja":"Ave noturna de olhos grandes que gira bem a cabeça.",
+  "formiga":"Inseto pequenininho que anda em fila e vive em colônia.",
+  "golfinho":"Animal marinho inteligente e brincalhão, parece um peixe grande e cinza.",
+  "bombeiro":"Quem apaga incêndios e faz resgates.",
+  "dentista":"Profissional que cuida dos dentes.",
+  "piloto":"Quem dirige o avião.",
+  "cozinheiro":"Quem prepara a comida num restaurante.",
+  "professor":"Quem dá aula e ensina.",
+  "encanador":"Quem conserta cano, torneira e vazamento.",
+  "astronauta":"Quem viaja ao espaço.",
+  "jornalista":"Quem apura e conta notícias.",
+  "veterinário":"Médico de animais.",
+  "eletricista":"Quem mexe com fiação e instalação elétrica.",
+  "juiz":"Quem julga e decide — no tribunal ou no jogo.",
+  "barbeiro":"Quem corta cabelo e faz barba.",
+  "praia":"Faixa de areia à beira do mar.",
+  "aeroporto":"Lugar de onde os aviões decolam e pousam.",
+  "biblioteca":"Lugar silencioso cheio de livros para consultar ou pegar emprestado.",
+  "academia":"Lugar com aparelhos e pesos para malhar.",
+  "hospital":"Lugar onde se trata doente e faz cirurgia.",
+  "cinema":"Sala escura com tela grande para assistir filme.",
+  "floresta":"Área grande coberta de árvores.",
+  "deserto":"Região muito seca, de areia e quase sem chuva.",
+  "estádio":"Arena grande onde acontecem jogos e shows.",
+  "shopping":"Prédio com várias lojas, praça de alimentação e cinema.",
+  "cemitério":"Lugar onde as pessoas são enterradas.",
+  "zoológico":"Parque onde animais ficam em recintos para visitação.",
+  "guarda-chuva":"Objeto que se abre sobre a cabeça pra não molhar na chuva.",
+  "óculos":"Duas lentes numa armação, usadas no rosto pra enxergar melhor.",
+  "chave":"Peça de metal que abre e tranca fechadura.",
+  "escova de dente":"Cabo com cerdas para limpar os dentes.",
+  "celular":"Telefone de bolso com tela, câmera e internet.",
+  "mochila":"Bolsa que se carrega nas costas.",
+  "travesseiro":"Almofada onde se apoia a cabeça pra dormir.",
+  "panela":"Recipiente com cabo usado pra cozinhar no fogão.",
+  "relógio":"Objeto que mostra as horas.",
+  "espelho":"Superfície lisa que reflete a sua imagem.",
+  "vassoura":"Cabo com cerdas usado pra varrer o chão.",
+  "carteira":"Estojo dobrável onde se guarda dinheiro e documentos.",
+  "futebol":"Esporte de dois times chutando uma bola pro gol.",
+  "natação":"Esporte de nadar na piscina ou no mar.",
+  "surfe":"Esporte de pegar onda em cima de uma prancha.",
+  "boxe":"Luta de socos com luvas, dentro de um ringue.",
+  "vôlei":"Esporte de bater a bola por cima de uma rede, sem deixar cair.",
+  "skate":"Prancha com quatro rodinhas usada pra andar e fazer manobras.",
+  "xadrez":"Jogo de tabuleiro com peças brancas e pretas e um rei a proteger.",
+  "maratona":"Corrida a pé de mais de 42 quilômetros.",
+  "tênis":"Esporte de rebater a bolinha com raquete por cima da rede.",
+  "judô":"Arte marcial japonesa de quedas e imobilizações, com quimono.",
+  "escalada":"Subir uma parede de pedra ou muro artificial, preso a cordas.",
+  "ciclismo":"Esporte praticado em cima da bicicleta.",
+  "novela":"História dramática em capítulos diários na TV.",
+  "desenho animado":"Programa feito de desenhos que se mexem, geralmente pra criança.",
+  "filme de terror":"Filme feito pra dar medo e susto.",
+  "documentário":"Filme sobre fatos reais, sem atores fazendo personagem.",
+  "reality show":"Programa que acompanha pessoas reais confinadas ou em disputa.",
+  "jornal":"Programa que apresenta as notícias do dia.",
+  "comédia romântica":"Filme leve sobre um casal que acaba junto no fim.",
+  "série policial":"Série sobre crimes, investigação e polícia.",
+  "pegadinha":"Brincadeira gravada escondido pra enganar alguém.",
+  "talk show":"Programa de entrevista com apresentador e convidados.",
+  "filme de ação":"Filme com perseguição, explosão e luta.",
+  "musical":"Filme ou peça em que os personagens cantam e dançam a história.",
+  "samba":"Ritmo brasileiro de roda, com pandeiro e cavaquinho.",
+  "forró":"Ritmo nordestino de sanfona, dançado em dupla e coladinho.",
+  "rock":"Estilo com guitarra elétrica, baixo e bateria, geralmente alto.",
+  "funk":"Ritmo urbano brasileiro de batida forte e repetida.",
+  "sertanejo":"Estilo brasileiro de duplas, com viola e letra romântica.",
+  "rap":"Estilo em que a letra é falada em ritmo, com rimas.",
+  "pagode":"Samba mais leve e de roda, tocado entre amigos.",
+  "ópera":"Espetáculo teatral cantado por vozes líricas, com orquestra.",
+  "bossa nova":"Estilo brasileiro suave de violão e voz baixinha.",
+  "axé":"Ritmo animado da Bahia, de carnaval e trio elétrico.",
+  "heavy metal":"Rock pesado, de guitarra distorcida e som agressivo.",
+  "reggae":"Ritmo jamaicano lento e cadenciado.",
+  "passaporte":"Documento que permite entrar em outro país.",
+  "mala":"Bagagem grande com rodinhas onde se leva a roupa da viagem.",
+  "hotel":"Prédio onde se aluga quarto por diária.",
+  "mochilão":"Viagem barata e longa carregando só uma mochila.",
+  "cruzeiro":"Viagem de férias em navio grande.",
+  "camping":"Acampar ao ar livre, dormindo em barraca.",
+  "estrada":"Via longa entre cidades, por onde se viaja de carro.",
+  "turista":"Pessoa visitando um lugar por passeio.",
+  "souvenir":"Lembrancinha comprada na viagem.",
+  "voo atrasado":"Avião que não sai na hora e deixa todo mundo esperando.",
+  "mapa":"Desenho de uma região que mostra onde ficam as coisas.",
+  "rodoviária":"Estação de onde saem os ônibus de viagem.",
+  "prova":"Teste escrito para medir o que o aluno aprendeu.",
+  "recreio":"Intervalo entre as aulas para descansar e brincar.",
+  "professor chato":"Aquele professor rígido de quem ninguém gosta.",
+  "dever de casa":"Exercício que o aluno leva pra fazer em casa.",
+  "formatura":"Cerimônia de quem termina o curso, com beca e diploma.",
+  "cantina":"Lanchonete dentro da escola.",
+  "reprovar":"Não passar de ano e repetir a série.",
+  "excursão":"Passeio da turma fora da escola.",
+  "boletim":"Papel com as notas do aluno no período.",
+  "apresentação":"Trabalho falado na frente da turma.",
+  "merenda":"Comida servida de graça na escola.",
+  "wi-fi":"Internet sem fio à qual o celular se conecta.",
+  "senha":"Código secreto que dá acesso a uma conta.",
+  "bateria fraca":"Celular quase descarregado, prestes a desligar.",
+  "atualização":"Nova versão de um programa, que ele baixa e instala.",
+  "vírus":"Programa malicioso que estraga ou invade o aparelho.",
+  "carregador":"Fio com plugue que enche a bateria do aparelho.",
+  "nuvem":"Espaço na internet onde os arquivos ficam guardados.",
+  "robô":"Máquina que se move e executa tarefas sozinha.",
+  "impressora":"Máquina que passa pro papel o que está na tela.",
+  "videochamada":"Ligação em que as pessoas se veem pela câmera.",
+  "emoji":"Carinha ou símbolo colorido usado nas mensagens.",
+  "spam":"Mensagem chata e não pedida, geralmente propaganda.",
+  "aniversário":"Festa do dia em que a pessoa nasceu, com bolo e parabéns.",
+  "casamento":"Cerimônia e festa de duas pessoas que se unem.",
+  "karaokê":"Cantar músicas conhecidas lendo a letra na tela.",
+  "balada":"Festa noturna com música alta, pista e bebida.",
+  "réveillon":"Festa da virada do ano, à meia-noite de 31 de dezembro.",
+  "carnaval":"Festa de rua com fantasia, bloco e desfile.",
+  "festa junina":"Festa de junho com fogueira, quadrilha, bandeirinha e milho.",
+  "chá de bebê":"Festa em que os convidados dão presentes pro bebê que vai nascer.",
+  "despedida":"Festa de quem está indo embora ou vai se casar.",
+  "piquenique":"Comer ao ar livre sentado numa toalha no chão.",
+  "fantasia":"Roupa de personagem usada em festa a caráter.",
+  "gravata":"Faixa de tecido amarrada no pescoço, usada com camisa social.",
+  "chinelo":"Calçado aberto e simples, preso pelo dedo.",
+  "biquíni":"Roupa de banho feminina de duas peças.",
+  "casaco de pele":"Casaco caro e peludo, feito de pele animal.",
+  "meia furada":"Meia velha com buraco por onde o dedo aparece.",
+  "terno":"Conjunto social de paletó e calça do mesmo tecido.",
+  "boné":"Chapéu de pano com aba na frente.",
+  "vestido de noiva":"Vestido longo e branco usado no casamento.",
+  "pijama":"Roupa confortável usada pra dormir.",
+  "salto alto":"Sapato feminino com salto que aumenta a altura.",
+  "uniforme":"Roupa igual para todos de um grupo, escola ou trabalho.",
+  "luva":"Peça que cobre a mão e os dedos.",
+  "geladeira":"Armário que esfria e conserva os alimentos.",
+  "sofá":"Assento comprido e macio da sala.",
+  "chuveiro":"Peça no teto do banheiro de onde cai a água do banho.",
+  "varal":"Fio ou grade onde a roupa lavada seca.",
+  "micro-ondas":"Forninho que esquenta comida em poucos minutos.",
+  "tapete":"Pano grosso que cobre parte do chão.",
+  "ventilador":"Aparelho de hélice que joga ar pra refrescar.",
+  "pia entupida":"Pia que não escoa e acumula água parada.",
+  "cortina":"Pano na janela que bloqueia a luz e a vista.",
+  "liquidificador":"Aparelho com lâmina que bate suco e vitamina.",
+  "porta que range":"Porta com dobradiça velha que faz barulho ao abrir.",
+  "churrasqueira":"Estrutura de alvenaria ou ferro onde se assa carne na brasa.",
+  "vampiro":"Morto-vivo que bebe sangue, teme o sol e o alho.",
+  "zumbi":"Morto que volta a andar, lento e atrás de gente.",
+  "lobisomem":"Homem que vira lobo nas noites de lua cheia.",
+  "fantasma":"Alma de um morto que aparece e assombra.",
+  "bruxa":"Mulher que faz feitiço, com caldeirão e vassoura.",
+  "múmia":"Corpo antigo embrulhado em faixas, do Egito.",
+  "saci":"Menino negro de uma perna só, com gorro vermelho e cachimbo, que faz travessuras.",
+  "curupira":"Protetor da mata com cabelo de fogo e pés virados pra trás.",
+  "dragão":"Lagarto gigante com asas que cospe fogo.",
+  "alienígena":"Ser vindo de outro planeta.",
+  "palhaço assassino":"Palhaço de filme de terror que ataca as pessoas.",
+  "boitatá":"Cobra de fogo do folclore que protege os campos."
+};
+
 const QUESTIONS = [
   "Onde você normalmente encontra isso?",
   "Descreva isso em uma palavra só.",
@@ -704,12 +887,13 @@ const AVATAR_COLORS = ["#ff5f56","#ffc857","#4ecb8f","#5fa8ff","#c084fc","#fb923
 const ROUND_OPTS = [{v:3,l:"3"},{v:5,l:"5"},{v:8,l:"8"},{v:0,l:"Sem limite"}];
 const TIMER_OPTS = [{v:0,l:"Sem tempo"},{v:20,l:"20s"},{v:30,l:"30s"},{v:45,l:"45s"}];
 const VOTE_OPTS  = [{v:"secret",l:"Voto secreto"},{v:"quick",l:"Voto em grupo"}];
+const QROUND_OPTS = [{v:1,l:"1 volta"},{v:2,l:"2 voltas"},{v:3,l:"3 voltas"}];
 
 /* ============ ESTADO ============ */
 let S = {
   players: ["","",""],
   scores: {},
-  settings: { rounds:5, timer:30, vote:"secret", cats:Object.keys(BANK).slice() },
+  settings: { rounds:5, timer:30, vote:"secret", qRounds:2, cats:Object.keys(BANK).slice() },
   round:0, category:null, word:null, outIdx:null,
   order:[], pairs:[], qStep:0, passIdx:0,
   votes:{}, voterIdx:0, accused:null, caught:false,
@@ -746,6 +930,7 @@ function load(){
       if(ROUND_OPTS.some(o=>o.v===st.rounds)) S.settings.rounds = st.rounds;
       if(TIMER_OPTS.some(o=>o.v===st.timer)) S.settings.timer = st.timer;
       if(VOTE_OPTS.some(o=>o.v===st.vote)) S.settings.vote = st.vote;
+      if(QROUND_OPTS.some(o=>o.v===st.qRounds)) S.settings.qRounds = st.qRounds;
       if(Array.isArray(st.cats)){
         const valid = st.cats.filter(c => BANK[c]);
         if(valid.length) S.settings.cats = valid;
@@ -810,7 +995,11 @@ function removePlayer(i){
 function openSettings(){ renderSettings(); go("s-settings"); }
 function renderSettings(){
   chipRow("set-rounds", ROUND_OPTS, S.settings.rounds, v => { S.settings.rounds = v; save(); renderSettings(); });
+  chipRow("set-qrounds", QROUND_OPTS, S.settings.qRounds, v => { S.settings.qRounds = v; save(); renderSettings(); });
   chipRow("set-timer",  TIMER_OPTS, S.settings.timer,  v => { S.settings.timer  = v; save(); renderSettings(); });
+  const np = Math.max(3, S.players.filter(n => n.trim()).length);
+  document.getElementById("qr-note").textContent =
+    "com " + np + " jogadores: " + (np * S.settings.qRounds) + " perguntas";
   chipRow("set-vote",   VOTE_OPTS,  S.settings.vote,   v => { S.settings.vote   = v; save(); renderSettings(); });
   document.getElementById("vote-explain").textContent = S.settings.vote === "secret"
     ? "O celular passa de novo e cada jogador vota escondido. Mais justo, leva mais tempo."
@@ -905,12 +1094,22 @@ function pickCategory(cat){
   S.word = pick(BANK[S.category]);
   S.outIdx = Math.floor(Math.random() * S.players.length);
   S.order = shuffle(S.players.map((_,i) => i));
-  const qs = shuffle(QUESTIONS).slice(0, S.order.length);
-  S.pairs = S.order.map((asker,k) => ({
-    asker: asker,
-    answerer: S.order[(k+1) % S.order.length],
-    q: qs[k]
-  }));
+  const n = S.order.length;
+  const voltas = S.settings.qRounds;
+  let qs = shuffle(QUESTIONS);
+  while(qs.length < n * voltas) qs = qs.concat(shuffle(QUESTIONS));
+  S.pairs = [];
+  for(let r = 0; r < voltas; r++){
+    const off = 1 + (r % (n - 1));
+    for(let k = 0; k < n; k++){
+      S.pairs.push({
+        asker: S.order[k],
+        answerer: S.order[(k + off) % n],
+        q: qs[r * n + k],
+        volta: r + 1
+      });
+    }
+  }
   S.passIdx = 0;
   showPass();
 }
@@ -945,81 +1144,55 @@ function toReveal(){
 function resetSecret(){
   const sec = document.getElementById("secret");
   sec.className = "secret";
-  document.getElementById("secret-face").className = "face hidden-face";
-  document.getElementById("secret-face").innerHTML =
-    '<div class="lock">🔒</div><div class="t">Segure o botão abaixo<br>para ver sua carta</div>';
+  const face = document.getElementById("secret-face");
+  face.className = "face hidden-face";
+  face.innerHTML = '<div class="lock">🔒</div><div class="t">Só quem foi chamado<br>pode tocar em ver.</div>';
+  document.getElementById("show-btn").style.display = "";
+  document.getElementById("what-btn").style.display = "none";
   document.getElementById("rev-next").style.display = "none";
   document.getElementById("rev-tip").style.display = "none";
-  document.getElementById("hold-btn").style.display = "";
-  document.getElementById("hold-lbl").textContent = "Segure para revelar";
-  document.getElementById("hold-fill").style.width = "0%";
-  holdSeen = false;
 }
 
-/* --- segurar para revelar --- */
-let holdRaf = null, holdStart = 0, holdSeen = false, holdOn = false;
-const HOLD_MS = 550;
-
-function holdBegin(e){
-  e.preventDefault();
-  if(holdOn) return;
-  holdOn = true;
-  holdStart = performance.now();
-  document.getElementById("hold-btn").classList.add("armed");
-  const step = () => {
-    if(!holdOn) return;
-    const p = Math.min(1, (performance.now() - holdStart) / HOLD_MS);
-    document.getElementById("hold-fill").style.width = (p*100) + "%";
-    if(p >= 1){ if(!holdSeen) buzz(18); showSecret(); }
-    holdRaf = requestAnimationFrame(step);
-  };
-  holdRaf = requestAnimationFrame(step);
-}
-function holdEnd(){
-  if(!holdOn) return;
-  holdOn = false;
-  if(holdRaf) cancelAnimationFrame(holdRaf);
-  document.getElementById("hold-btn").classList.remove("armed");
-  document.getElementById("hold-fill").style.width = "0%";
-  if(holdSeen){
-    hideSecret();
-    document.getElementById("hold-btn").style.display = "none";
-    document.getElementById("rev-next").style.display = "";
-    document.getElementById("rev-tip").style.display = "";
-  }
-}
 function showSecret(){
-  if(holdSeen) return;
-  holdSeen = true;
+  buzz(14);
   const idx = S.order[S.passIdx];
   const sec = document.getElementById("secret");
   const face = document.getElementById("secret-face");
-  document.getElementById("hold-lbl").textContent = "Solte para esconder";
-  if(idx === S.outIdx){
+  const isOut = (idx === S.outIdx);
+
+  if(isOut){
     sec.className = "secret lit-out";
     face.className = "face";
     face.innerHTML =
       '<div class="cat-tag">' + esc(S.category) + '</div>' +
       '<p class="out-big">Você está fora do loop</p>' +
       '<p class="out-note">Você não sabe a palavra. Escute as respostas, finja que sabe e tente descobrir.</p>';
-    document.getElementById("rev-tip-tx").innerHTML = pick(TIPS_OUT);
   } else {
     sec.className = "secret lit-in";
     face.className = "face";
     face.innerHTML =
       '<div class="cat-tag">' + esc(S.category) + '</div>' +
       '<p class="word">' + esc(S.word) + '</p>' +
-      '<p class="word-note">Alguém no grupo não está vendo esta palavra.</p>';
+      '<p class="word-note" id="word-note">Alguém no grupo não está vendo esta palavra.</p>';
+    if(WHATIS[S.word]) document.getElementById("what-btn").style.display = "";
     document.getElementById("rev-tip-tx").innerHTML = pick(TIPS_IN);
+    document.getElementById("rev-tip").style.display = "";
   }
+
+  document.getElementById("show-btn").style.display = "none";
+  document.getElementById("rev-next").style.display = "";
 }
-function hideSecret(){
-  const sec = document.getElementById("secret");
-  sec.className = "secret";
-  document.getElementById("secret-face").className = "face hidden-face";
-  document.getElementById("secret-face").innerHTML =
-    '<div class="lock">✅</div><div class="t">Carta guardada.<br>Pode passar o celular.</div>';
+
+function explainWord(){
+  buzz(10);
+  const note = document.getElementById("word-note");
+  if(note){
+    note.className = "word-what";
+    note.textContent = WHATIS[S.word] || "";
+  }
+  document.getElementById("what-btn").style.display = "none";
 }
+
 function nextPass(){ S.passIdx += 1; showPass(); }
 
 /* ============ CONVERSA ============ */
@@ -1032,7 +1205,9 @@ function renderQuestion(){
   const step = S.pairs[S.qStep];
   const total = S.pairs.length;
   document.getElementById("talk-round").textContent = "Rodada " + S.round;
-  document.getElementById("talk-prog").textContent = "Pergunta " + (S.qStep+1) + " de " + total;
+  document.getElementById("talk-prog").textContent =
+    (S.settings.qRounds > 1 ? "Volta " + step.volta + "/" + S.settings.qRounds + " · " : "") +
+    (S.qStep+1) + " de " + total;
   document.getElementById("talk-cat").textContent = S.category;
 
   const aAv = document.getElementById("duo-a-av");
@@ -1365,12 +1540,6 @@ function confetti(){
 
 /* ============ INÍCIO ============ */
 (function init(){
-  const hb = document.getElementById("hold-btn");
-  hb.addEventListener("pointerdown", holdBegin);
-  hb.addEventListener("pointerup", holdEnd);
-  hb.addEventListener("pointercancel", holdEnd);
-  hb.addEventListener("pointerleave", holdEnd);
-  hb.addEventListener("contextmenu", e => e.preventDefault());
   load();
   renderSetup();
   renderSettings();
