@@ -254,6 +254,15 @@
     animation:pop .28s cubic-bezier(.34,1.56,.64,1);
   }
   .out-big{font-size:38px;font-weight:700;color:var(--cat);margin:0 0 14px;line-height:1.02;letter-spacing:-.8px;}
+  .dica{
+    background:var(--cat);color:#fff;border-radius:var(--r-sm);
+    padding:14px 16px;margin:0 0 16px;font-size:19px;font-weight:600;line-height:1.3;
+    box-shadow:0 4px 0 var(--cat-deep);
+  }
+  .dica-t{
+    display:block;font-size:11px;font-weight:600;letter-spacing:1.3px;
+    text-transform:uppercase;opacity:.75;margin-bottom:5px;
+  }
   .out-note{color:var(--ink-soft);font-size:15.5px;line-height:1.5;margin:0;font-weight:500;}
 
   /* ---------- pergunta: o cartão é a tela ---------- */
@@ -431,7 +440,7 @@
     <div class="card">
       <div class="step"><div class="step-n">1</div><div class="step-t">O celular passa de mão em mão. Todos veem a mesma <b>palavra secreta</b> — menos um, que só vê a categoria. Esse é o <b>infiltrado</b>. Não conhece a palavra? Toque em <b>“não sei o que é isso”</b> na carta.</div></div>
       <div class="step"><div class="step-n">2</div><div class="step-t">O app sorteia os pares: <b>cada jogador lê uma pergunta</b> para outro, que responde em voz alta. São <b>2 voltas</b> por padrão, então cada um responde duas vezes — dá tempo de desconfiar de alguém.</div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-t">Quem sabe a palavra precisa provar que sabe — <b>sem entregar</b> pros outros. Quem está fora precisa inventar uma resposta que cole.</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-t">Quem sabe a palavra precisa provar que sabe — <b>sem entregar</b> pros outros. O infiltrado recebe <b>uma única dica</b> sobre a palavra e tem que se virar com ela.</div></div>
       <div class="step"><div class="step-n">4</div><div class="step-t">O app <b>relembra todas as perguntas</b> pra vocês discutirem. Depois cada um <b>vota em segredo</b>.</div></div>
       <div class="step"><div class="step-n">5</div><div class="step-t">Se o infiltrado for pego, ele ainda tem <b>uma chance de chutar a palavra</b>. Se acertar, o esforço do grupo <b>vira pó</b>.</div></div>
     </div>
@@ -1179,6 +1188,140 @@ const CAT_ICON = {
   "Monstros":   ICO('<path d="M5 20.4V11.4a7 7 0 0 1 14 0v9l-2.3-1.9-2.3 1.9-2.4-1.9-2.4 1.9L7.3 18.5z"/><circle cx="9.5" cy="11.4" r="1.1"/><circle cx="14.5" cy="11.4" r="1.1"/>'),
 };
 
+
+/* ============ DICA DO INFILTRADO ============
+   Cada traco vale para varias palavras da categoria: ajuda a blefar
+   sem apontar qual e a palavra. Validado por teste: nenhum traco
+   cobre menos de 3 palavras. */
+const TRACOS = {
+  "Comida":{
+    "é salgado":["pizza","sushi","feijoada","hambúrguer","pastel","churrasco","pipoca","lasanha","coxinha"],
+    "é doce":["sorvete","brigadeiro","açaí"],
+    "dá pra comer com a mão":["pizza","sushi","hambúrguer","pastel","pipoca","brigadeiro","coxinha"],
+    "combina com festa":["pizza","churrasco","pipoca","brigadeiro","coxinha"],
+    "pesa no estômago":["feijoada","hambúrguer","churrasco","lasanha"],
+    "é servido quente":["feijoada","hambúrguer","pastel","churrasco","lasanha","coxinha"]
+  },
+  "Animais":{
+    "tem a ver com água":["pinguim","tubarão","tartaruga","polvo","golfinho"],
+    "é grande":["leão","tubarão","elefante","girafa","golfinho"],
+    "é pequeno":["coelho","morcego","coruja","formiga"],
+    "muita gente tem medo":["leão","tubarão","morcego","polvo"],
+    "é rápido":["leão","tubarão","coelho","morcego","golfinho"],
+    "acham bonitinho":["pinguim","coelho","tartaruga","coruja","golfinho"]
+  },
+  "Profissões":{
+    "trabalha de uniforme":["bombeiro","piloto","cozinheiro","astronauta","juiz"],
+    "lida com o corpo das pessoas":["bombeiro","dentista","veterinário","barbeiro"],
+    "tem risco no trabalho":["bombeiro","piloto","astronauta","eletricista","jornalista"],
+    "conserta coisas":["encanador","eletricista","dentista","barbeiro"],
+    "trabalha mais em lugar fechado":["dentista","cozinheiro","professor","jornalista","juiz","barbeiro"],
+    "precisa estudar muito":["dentista","piloto","professor","astronauta","veterinário","juiz"]
+  },
+  "Lugares":{
+    "costuma ter muita gente":["praia","aeroporto","academia","estádio","shopping","cinema"],
+    "é lugar silencioso":["biblioteca","floresta","deserto","cemitério"],
+    "é ao ar livre":["praia","floresta","deserto","estádio","cemitério","zoológico"],
+    "dá pra passar o dia todo":["praia","academia","shopping","zoológico","floresta"],
+    "tem cheiro marcante":["hospital","praia","academia","zoológico","cinema"],
+    "não é lugar de ir sozinho à noite":["floresta","deserto","cemitério","estádio"]
+  },
+  "Objetos":{
+    "cabe no bolso":["chave","celular","relógio","carteira","óculos"],
+    "usa todo dia":["escova de dente","celular","chave","relógio","travesseiro"],
+    "tem a ver com limpeza ou higiene":["escova de dente","vassoura","panela","espelho"],
+    "quebra fácil":["óculos","celular","espelho","relógio"],
+    "fica parado em casa":["travesseiro","panela","espelho","vassoura","guarda-chuva"],
+    "você levaria numa viagem":["óculos","celular","mochila","carteira","guarda-chuva","escova de dente"]
+  },
+  "Esportes":{
+    "tem bola":["futebol","vôlei","tênis"],
+    "é individual":["natação","surfe","boxe","skate","xadrez","maratona","tênis","judô","escalada","ciclismo"],
+    "tem contato físico":["futebol","boxe","judô"],
+    "precisa de equipamento":["surfe","boxe","skate","tênis","escalada","ciclismo"],
+    "cansa muito":["natação","boxe","maratona","escalada","ciclismo","futebol"],
+    "dá pra fazer na rua":["futebol","skate","maratona","ciclismo","vôlei"]
+  },
+  "Filmes":{
+    "é pra ver com criança":["O Rei Leão","Frozen","Toy Story","Harry Potter"],
+    "tem muita ação":["Vingadores","Homem-Aranha","Velozes e Furiosos","Jurassic Park","Matrix","Tropa de Elite"],
+    "é desenho ou animação":["O Rei Leão","Frozen","Toy Story"],
+    "é filme sério":["Titanic","Tropa de Elite","Cidade de Deus","Matrix"],
+    "tem continuação":["Vingadores","Homem-Aranha","Velozes e Furiosos","Harry Potter","Jurassic Park","Matrix","Toy Story","Tropa de Elite"],
+    "faz muita gente chorar":["Titanic","O Rei Leão","Toy Story","Cidade de Deus"]
+  },
+  "Música":{
+    "é brasileiro":["samba","forró","funk","sertanejo","pagode","bossa nova","axé"],
+    "é de fora":["rock","rap","ópera","heavy metal","reggae"],
+    "dá pra dançar":["samba","forró","funk","sertanejo","pagode","axé"],
+    "é agitado":["rock","funk","axé","heavy metal","samba"],
+    "é mais calmo":["bossa nova","ópera","reggae","sertanejo"],
+    "toca muito em festa":["samba","forró","funk","sertanejo","pagode","axé"]
+  },
+  "Viagem":{
+    "é coisa ruim":["voo atrasado","mala","rodoviária"],
+    "é coisa boa":["hotel","cruzeiro","camping","souvenir","mochilão"],
+    "tem a ver com dinheiro":["hotel","cruzeiro","souvenir","mochilão"],
+    "você carrega junto":["passaporte","mala","souvenir","mapa"],
+    "tem a ver com transporte":["estrada","voo atrasado","rodoviária","cruzeiro"],
+    "aparece nas fotos":["hotel","cruzeiro","camping","souvenir","turista","mapa"]
+  },
+  "Escola":{
+    "dá ansiedade":["prova","reprovar","apresentação","boletim","professor chato"],
+    "é coisa boa":["recreio","formatura","excursão","merenda","cantina","biblioteca"],
+    "envolve os pais":["boletim","reprovar","formatura","dever de casa"],
+    "acontece dentro da sala":["prova","apresentação","dever de casa","professor chato"],
+    "tem a ver com comida":["merenda","cantina","recreio"],
+    "acontece uma vez só":["formatura","excursão","reprovar","apresentação"]
+  },
+  "Tecnologia":{
+    "irrita todo mundo":["senha","bateria fraca","vírus","spam","atualização"],
+    "é coisa boa":["wi-fi","nuvem","carregador","videochamada","emoji"],
+    "tem a ver com segurança":["senha","vírus","spam","nuvem"],
+    "é uma coisa física":["carregador","impressora","robô","bateria fraca"],
+    "aparece na tela":["senha","atualização","emoji","spam","videochamada"],
+    "sua avó não entenderia":["nuvem","vírus","atualização","spam","emoji"]
+  },
+  "Festa":{
+    "é festa de família":["aniversário","casamento","chá de bebê","festa junina","churrasco"],
+    "vai até tarde":["balada","réveillon","carnaval","casamento","karaokê","despedida"],
+    "acontece na rua":["carnaval","festa junina","réveillon","piquenique"],
+    "tem data marcada no ano":["réveillon","carnaval","festa junina"],
+    "criança vai junto":["aniversário","festa junina","churrasco","piquenique","chá de bebê","fantasia"],
+    "tem música alta":["balada","carnaval","karaokê","réveillon","casamento"]
+  },
+  "Roupas":{
+    "é roupa social":["gravata","terno","vestido de noiva","salto alto"],
+    "é roupa confortável":["chinelo","pijama","boné","luva"],
+    "é mais de verão":["chinelo","biquíni","boné"],
+    "é mais de frio":["casaco de pele","luva","pijama","terno"],
+    "chama atenção":["casaco de pele","biquíni","vestido de noiva","salto alto","meia furada"],
+    "quase todo mundo tem":["chinelo","boné","pijama","meia furada","uniforme"]
+  },
+  "Em casa":{
+    "usa energia elétrica":["geladeira","micro-ondas","ventilador","liquidificador","chuveiro"],
+    "é móvel ou tecido":["sofá","tapete","cortina","varal"],
+    "fica na cozinha":["geladeira","micro-ondas","liquidificador","pia entupida"],
+    "faz barulho":["liquidificador","ventilador","micro-ondas","porta que range","chuveiro"],
+    "é coisa chata":["pia entupida","porta que range","varal"],
+    "tem a ver com conforto":["sofá","tapete","cortina","ventilador","chuveiro","churrasqueira"]
+  },
+  "Monstros":{
+    "é do folclore brasileiro":["saci","curupira","boitatá"],
+    "é de filme":["vampiro","zumbi","lobisomem","alienígena","palhaço assassino","múmia"],
+    "já foi humano":["vampiro","zumbi","lobisomem","fantasma","múmia","bruxa"],
+    "aparece de noite":["vampiro","lobisomem","fantasma","boitatá","saci"],
+    "é mais assustador que engraçado":["zumbi","palhaço assassino","múmia","fantasma","dragão"],
+    "tem poder mágico":["bruxa","saci","curupira","dragão","boitatá","vampiro"]
+  }
+};
+
+function dicaPara(cat, palavra){
+  const t = TRACOS[cat] || {};
+  const cabem = Object.keys(t).filter(k => t[k].includes(palavra));
+  return cabem.length ? pick(cabem) : null;
+}
+
 function theme(cat){
   const [bg, deep] = (cat && CAT_COLOR[cat]) ? CAT_COLOR[cat] : BRAND;
   const r = document.documentElement.style;
@@ -1209,8 +1352,8 @@ let S = {
   settings: { rounds:5, timer:30, vote:"secret", qRounds:2, cats:Object.keys(BANK).slice() },
   round:0, category:null, word:null, outIdx:null,
   order:[], pairs:[], qStep:0, passIdx:0,
-  votes:{}, voterIdx:0, accused:null, caught:false, outBag:[],
-  guess:null, guessRight:false, delta:{}, motivo:{}
+  votes:{}, voterIdx:0, accused:null, caught:false, outBag:[], ultimoOut:null,
+  guess:null, guessRight:false, delta:{}, motivo:{}, dica:null
 };
 
 /* ============ UTIL ============ */
@@ -1372,13 +1515,13 @@ function startGame(){
   err.className = "err";
   S.players = names;
   S.scores = {}; names.forEach(n => S.scores[n] = 0);
-  S.round = 0; S.outBag = [];
+  S.round = 0; S.outBag = []; S.ultimoOut = null;
   save();
   startRound();
 }
 function rematch(){
   Object.keys(S.scores).forEach(n => S.scores[n] = 0);
-  S.round = 0; S.outBag = [];
+  S.round = 0; S.outBag = []; S.ultimoOut = null;
   startRound();
 }
 function quitGame(){ showFinal(); }
@@ -1426,8 +1569,17 @@ function showCatPick(){
 function sortearInfiltrado(){
   if(!Array.isArray(S.outBag) || !S.outBag.length || S.outBag.some(i => i >= S.players.length)){
     S.outBag = shuffle(S.players.map((_,i) => i));
+    /* na virada do ciclo o sorteio poderia repetir a mesma pessoa duas
+       rodadas seguidas; troca de posicao pra isso nao acontecer */
+    const n = S.outBag.length;
+    if(n > 1 && S.ultimoOut !== null && S.outBag[n-1] === S.ultimoOut){
+      const j = Math.floor(Math.random() * (n - 1));
+      S.outBag[n-1] = S.outBag[j];
+      S.outBag[j] = S.ultimoOut;
+    }
   }
-  return S.outBag.pop();
+  S.ultimoOut = S.outBag.pop();
+  return S.ultimoOut;
 }
 
 function pickCategory(cat){
@@ -1435,7 +1587,14 @@ function pickCategory(cat){
   S.category = cat || pick(S.settings.cats);
   S.word = pick(BANK[S.category]);
   S.outIdx = sortearInfiltrado();
+  S.dica = dicaPara(S.category, S.word);
   S.order = shuffle(S.players.map((_,i) => i));
+  /* o infiltrado nao pode ser o primeiro a responder: sem pista nenhuma
+     ele se entrega na hora. Gira a ordem pra ele cair no fim da 1a volta. */
+  const alvo = S.order.length - 1 - Math.floor(Math.random() * 2);
+  const iOut = S.order.indexOf(S.outIdx);
+  const giro = (iOut - alvo + S.order.length) % S.order.length;
+  S.order = S.order.slice(giro).concat(S.order.slice(0, giro));
   const n = S.order.length;
   const voltas = S.settings.qRounds;
   let qs = shuffle(questionsFor(S.category));
@@ -1509,7 +1668,8 @@ function showSecret(){
     face.innerHTML =
       '<div class="cat-tag">' + esc(S.category) + '</div>' +
       '<p class="out-big">Você está fora do loop</p>' +
-      '<p class="out-note">Você não sabe a palavra. Escute as respostas, finja que sabe e tente descobrir.</p>';
+      (S.dica ? '<p class="dica"><span class="dica-t">Sua única dica</span>' + esc(S.dica) + '</p>' : '') +
+      '<p class="out-note">Ninguém mais sabe que você recebeu isso. Use pra disfarçar.</p>';
   } else {
     sec.className = "secret lit-in";
     face.className = "face";
