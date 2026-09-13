@@ -867,264 +867,452 @@ const WHATIS = {
   "boitatá":"Cobra de fogo do folclore que protege os campos."
 };
 
-const QUESTIONS_GERAL = [
-  "Fale mal disso.",
-  "A festa do seu aniversário é sobre isso. Como fica?",
-  "Explique isso pra um alienígena em 5 segundos.",
-  "Isso virou feriado. O que a gente faz nesse dia?",
-  "Alguém tatuou isso no braço. Ficou bom?",
-  "Se isso fosse gente, seria legal ou chato?",
-  "Isso apareceu no seu sonho. Foi bom ou ruim?",
-  "Diga uma coisa boa e uma ruim sobre isso.",
-  "Um bar se chama assim. Você entra?",
-  "Convença a gente a gostar disso."
-];
-
-const QUESTIONS_CAT = {
-  "Comida":[
-    "Um restaurante chique só serve isso. Que nome ele tem?",
-    "Sua sogra fez isso pro almoço. Você gosta?",
-    "Você come isso todo dia por um mês. Aguenta?",
-    "Você acha isso na geladeira às 3 da manhã. Come?",
-    "Um chef faz uma sobremesa disso. Como fica?",
-    "Primeiro encontro comendo isso. Bom sinal?",
-    "Isso caiu na sua roupa branca. Quanto você xinga?",
-    "Convença alguém a experimentar isso agora.",
-    "Isso passou a custar 200 reais. Você pede mesmo assim?",
-    "Sua avó prova isso pela primeira vez. O que ela diz?",
-    "É a última coisa que você come na vida. Valeu a pena?",
-    "Chegou uma caixa cheia disso na sua porta. Você gosta?",
-    "Isso vira a comida do hospital. Os doentes melhoram?",
-    "Isso vira o prato oficial do Brasil. Quem reclama?"
+const QUESTIONS_GERAL = {
+  aperta:[
+    "Fale mal disso.",
+    "Explique isso pra um alienígena em 5 segundos.",
+    "Isso virou feriado. Qual o nome do feriado?",
+    "Um bar se chama assim. Como é a decoração?",
+    "Convença a gente a gostar disso.",
+    "Se isso fosse gente, qual seria o apelido?"
   ],
-  "Animais":[
-    "Você virou esse bicho hoje. Qual seu primeiro problema?",
-    "Esse bicho aprendeu a falar. O que ele diz primeiro?",
-    "Uma máscara de luta livre desse bicho: dá medo?",
-    "Esse bicho vira mascote de time. De qual esporte?",
-    "Você entra num elevador com isso. Fica com medo?",
-    "Esse bicho arruma emprego. Que trabalho ele faz bem?",
-    "Esse bicho é o vilão do filme. Qual o nome do filme?",
-    "Esse bicho fica do tamanho de um carro. Legal ou ruim?",
-    "Esse bicho te encara na rua. Você foge ou tira foto?",
-    "Um zoológico só com esse bicho. Você paga pra entrar?",
-    "Esse bicho vira seu chefe. Como é o trabalho?",
-    "Explique esse bicho pra quem nunca viu.",
-    "Esse bicho entrou na sua casa. O que você faz?",
-    "Alguém tatuou esse bicho nas costas. Ficou bom?"
-  ],
-  "Profissões":[
-    "Essa pessoa aparece na sua festa. É bom ou é ruim?",
-    "Você faz esse trabalho amanhã. Qual a parte difícil?",
-    "Essa profissão vira programa de TV. Que nome tem?",
-    "Essa pessoa trabalha de graça pra você. Vale muito?",
-    "Essa pessoa erra feio no trabalho. O que acontece?",
-    "Um filme de ação sobre esse trabalho. Como começa?",
-    "Essa profissão acaba amanhã. Quem sente falta?",
-    "Seu filho quer ser isso. Você acha bom?",
-    "Isso passa a pagar 100 mil por mês. Você muda de emprego?",
-    "Fale mal desse trabalho.",
-    "Essa pessoa foi presa. O que ela fez?",
-    "Um robô assume esse trabalho. Fica melhor ou pior?",
-    "Você senta do lado dessa pessoa no avião. Puxa conversa?",
-    "Essa pessoa te atende de mau humor. O que dá errado?"
-  ],
-  "Lugares":[
-    "Um vilão monta o esconderijo dele aqui. Qual o nome dele?",
-    "Você fica trancado aqui 24 horas. Como se vira?",
-    "Esse lugar vira sua casa. O que você muda primeiro?",
-    "Primeiro encontro nesse lugar. Boa ideia?",
-    "Um filme de terror se passa aqui. Como é a cena?",
-    "Um casamento acontece aqui. Fica bonito?",
-    "Você perdeu o celular aqui. Acha de novo?",
-    "Esse lugar fecha pra sempre. Quem fica triste?",
-    "Que cheiro tem esse lugar?",
-    "Você trabalha aqui todo dia. Qual a pior parte?",
-    "Uma criança fica solta aqui. O que ela quebra?",
-    "É o único ponto turístico da cidade. Dá certo?",
-    "Você tem 1 minuto aqui pra pegar uma coisa. O quê?",
-    "Você dorme aqui hoje. Onde você se deita?"
-  ],
-  "Objetos":[
-    "Chegou uma caixa cheia disso na sua porta. Você gosta?",
-    "É a única coisa que você leva pra ilha deserta. Sobrevive?",
-    "Você vende isso na rua. O que você grita?",
-    "Isso vira arma num filme. Como é a luta?",
-    "Te deram isso de presente de casamento. Você gostou?",
-    "Isso sumiu da sua casa. Quando você percebe?",
-    "Explique isso sem dizer pra que serve.",
-    "Isso fica do tamanho de um carro. Serve pra quê agora?",
-    "Você achou isso enterrado no quintal. O que você pensa?",
-    "Virou obrigatório ter isso em casa. Quem reclama?",
-    "Você carrega isso o dia todo. Atrapalha?",
-    "Um museu põe isso na parede. Que nome dão pra obra?",
-    "Isso quebrou na pior hora. Que hora foi?",
-    "Isso passou a custar 5 mil reais. Você compra?"
-  ],
-  "Esportes":[
-    "Isso vira o esporte do Brasil. A gente ganha medalha?",
-    "Você compete nisso amanhã. Qual é o seu plano?",
-    "Sua avó tenta esse esporte. Como termina?",
-    "Isso vira obrigatório na escola. As crianças gostam?",
-    "Um filme sobre esse esporte. Como é o final?",
-    "Praticar isso na Lua. O que muda?",
-    "Onde você se machuca fazendo isso?",
-    "Você aposta seu dinheiro nisso. Fica nervoso?",
-    "Explique esse esporte em uma frase.",
-    "Você joga isso contra seu chefe. Deixa ele ganhar?",
-    "Um bebê tenta fazer isso. O que acontece?",
-    "Esse esporte acaba amanhã. Quem sente falta?",
-    "Você assiste isso 6 horas seguidas. Aguenta?",
-    "Esse esporte fica o mais rico do mundo. Quem enriquece?"
-  ],
-  "Filmes":[
-    "Você assiste isso 10 vezes seguidas. Aguenta?",
-    "Conte a história desse filme de um jeito ruim.",
-    "Vai ter continuação. Qual o nome do filme 2?",
-    "Você assiste isso com sua avó. Que parte dá vergonha?",
-    "Um personagem desse filme vira seu vizinho. Qual deles?",
-    "A escola faz uma peça disso. Que parte eles cortam?",
-    "Você refilma isso com 100 reais. Como você faz?",
-    "Que objeto desse filme você levaria pra casa?",
-    "Isso vira videogame. Como se joga?",
-    "Alguém te contou o final. Estragou?",
-    "Venda esse filme pra gente em 5 segundos.",
-    "Esse filme foi proibido. Quem reclama?",
-    "Uma criança de 6 anos assiste. Pode?",
-    "Passa na TV todo domingo. Você para pra ver?"
-  ],
-  "Música":[
-    "Isso tocou no seu casamento sem você pedir. Gostou?",
-    "Você só pode ouvir isso por um ano. Aguenta?",
-    "Isso vira o hino do Brasil. Fica estranho?",
-    "Sua avó dança isso na festa. Como é?",
-    "Você canta isso no karaokê agora. Passa vergonha?",
-    "Isso toca num velório. Combina?",
-    "Explique esse som sem cantar nada.",
-    "Isso toca no elevador do trabalho. Melhora o dia?",
-    "Você conhece alguém que só ouve isso. Como é essa pessoa?",
-    "Esse estilo some do mundo. Quem chora?",
-    "Um show disso lota o estádio. Quem é o cantor?",
-    "Seu vizinho toca isso às 3 da manhã. Você reclama?",
-    "Isso vira o som do seu despertador. Você acorda bem?",
-    "Isso toca na academia. Rende o treino?"
-  ],
-  "Viagem":[
-    "Isso aconteceu no primeiro dia da viagem. Estragou tudo?",
-    "Quanto você pagaria pra nunca mais passar por isso?",
-    "Isso vira cena de filme de comédia. Como é?",
-    "Você viaja com alguém que odeia isso. Dá certo?",
-    "Isso aconteceu 3 vezes na mesma viagem. Você desiste?",
-    "Fale bem disso como se fosse ótimo.",
-    "Sua sogra viaja com você e isso acontece. De quem é a culpa?",
-    "Isso vira obrigatório em toda viagem. É justo?",
-    "Você posta isso. Quantas curtidas?",
-    "Por causa disso você perdeu o voo. Como você reage?",
-    "Um gringo passa por isso no Brasil. O que ele acha?",
-    "Você tem 1 minuto pra resolver isso. Consegue?",
-    "Explique isso pra quem nunca viajou.",
-    "Isso aparece na viagem dos seus sonhos. Bom ou ruim?"
-  ],
-  "Escola":[
-    "Você volta pra escola e isso te espera. Qual sua cara?",
-    "Isso vira proibido. As crianças comemoram?",
-    "Isso acontece com você hoje, já adulto. Como reage?",
-    "Seu filho passa por isso. Você vai lá reclamar?",
-    "Isso vira novela. Qual é o drama?",
-    "Quanto você pagaria pra viver isso de novo?",
-    "Isso aparece no seu pesadelo. Qual a pior parte?",
-    "O professor faz isso com a turma toda. É justo?",
-    "Isso vira obrigatório até os 40 anos. Você aguenta?",
-    "Que história você ainda conta sobre isso?",
-    "Isso acontece na frente do seu crush. Que vergonha?",
-    "Uma escola sem isso é melhor?",
-    "Você conta isso pros seus pais. Como você começa?",
-    "Explique isso pra quem nunca foi à escola."
-  ],
-  "Tecnologia":[
-    "Isso some do mundo hoje. Vira bagunça?",
-    "Sua avó tenta usar isso sozinha. Como termina?",
-    "Isso falhou na pior hora. Que hora foi?",
-    "Explique isso pra alguém de 1950.",
-    "Isso começou a falar com você. O que ele diz?",
-    "Quanto você pagaria pra nunca mais mexer nisso?",
-    "Isso aparece num filme de terror. Como assusta?",
-    "Você fica uma semana sem isso. Aguenta?",
-    "Isso vira proibido. Quem reclama?",
-    "Explique isso sem usar palavra difícil.",
-    "Isso te acorda às 4 da manhã. Você xinga?",
-    "Uma criança usa isso melhor que você. Dá vergonha?",
-    "Isso vira assunto no jantar de família. Quem briga?",
-    "Isso fica quebrado pra sempre. Você se acostuma?"
-  ],
-  "Festa":[
-    "Você tem que ir nisso amanhã. Anima ou dá preguiça?",
-    "Deu tudo errado nessa festa. O que aconteceu?",
-    "Você organiza isso sozinho. O que você esquece?",
-    "Sua sogra é a convidada de honra. Como fica?",
-    "Isso vira feriado. Como o país comemora?",
-    "Você chega e não conhece ninguém. O que você faz?",
-    "Quanto dinheiro você gastaria nisso?",
-    "Isso acaba às 6 da manhã. Você fica até o fim?",
-    "Que música não pode faltar nisso?",
-    "Isso acontece na sua casa. O que você esconde antes?",
-    "Alguém chorou nessa festa. Por quê?",
-    "Isso vira proibido. Quem sente mais falta?",
-    "Você faz um discurso nisso. Fala sobre o quê?",
-    "Explique isso pra um alienígena em uma frase."
-  ],
-  "Roupas":[
-    "Você usa isso numa entrevista. Consegue o emprego?",
-    "Seu chefe chega no trabalho com isso. Qual sua cara?",
-    "Todo mundo no país tem que usar isso. Você aceita?",
-    "Isso está manchado. Você usa mesmo assim?",
-    "Você usa isso num casamento. Alguém comenta?",
-    "É a única roupa que você tem por um mês. Aguenta?",
-    "Explique isso pra quem nunca viu roupa.",
-    "Sua avó usa isso numa festa. Fica bonito?",
-    "Isso vira moda no mundo todo. Você usa também?",
-    "Isso custa 3 mil reais na loja. Você compra?",
-    "Te deram isso de presente. Você usa mesmo?",
-    "Isso rasgou no meio da rua. Que desespero?",
-    "Um super-herói usa isso. Qual o poder dele?",
-    "Você dorme vestindo isso. É confortável?"
-  ],
-  "Em casa":[
-    "Isso quebrou hoje. Quanto tempo até consertar?",
-    "Você se muda e não pode levar isso. Sente falta?",
-    "Isso faz barulho às 3 da manhã. Você vai ver o que é?",
-    "Explique isso pra quem nunca entrou numa casa.",
-    "Isso vira o destaque da sala. Fica bonito?",
-    "Sua sogra critica o seu. O que ela fala?",
-    "Isso dobrou de tamanho. Onde você põe?",
-    "Você fica um mês sem isso. Dá conta?",
-    "Isso aparece num filme de terror. Como assusta?",
-    "Quanto você pagaria pelo melhor do mundo?",
-    "Isso vira proibido em apartamento. É justo?",
-    "Uma visita mexeu no seu. Você se incomoda?",
-    "Isso sumiu de noite. O que você acha que houve?",
-    "Você está montando uma casa nova. Compra isso quando?"
-  ],
-  "Monstros":[
-    "Isso vira seu vizinho. Bom ou ruim?",
-    "Você encontra isso às 3 da manhã. Corre ou conversa?",
-    "Isso pede emprego na sua firma. Faz o quê?",
-    "Explique isso pra uma criança sem assustar ela.",
-    "Isso vira mascote de time. Dá certo?",
-    "Você passa a noite com isso. Como você escapa?",
-    "Isso chega na sua festa. O que os convidados fazem?",
-    "Você tem que vencer isso. Qual o ponto fraco?",
-    "Isso vira o herói do filme. Qual é a história?",
-    "Você se fantasia disso no carnaval. Ganha o concurso?",
-    "Isso briga com outro monstro. Quem ganha?",
-    "Isso conta a versão dele. O que ele fala?",
-    "Uma criança vê isso. Chora ou acha legal?",
-    "Isso te chamou nas redes sociais. Você aceita?"
+  respira:[
+    "De 0 a 10, quanto isso combina com você?",
+    "Alguém tatuou isso no braço. Ficou bom?",
+    "De 0 a 10, quanto você pensa nisso no dia a dia?",
+    "Isso apareceu no seu sonho. Foi bom ou ruim?"
   ]
 };
 
+const QUESTIONS_CAT = {
+  "Comida":{
+    aperta:[
+      "Um restaurante chique só serve isso. Que nome ele tem?",
+      "Você acha isso na geladeira às 3 da manhã. O que você faz?",
+      "Um chef faz uma sobremesa disso. Como fica?",
+      "Convença alguém a experimentar isso agora.",
+      "Sua avó prova isso pela primeira vez. O que ela diz?",
+      "Isso vira a comida do hospital. O que os doentes falam?",
+      "Isso vira o prato oficial do Brasil. Quem reclama primeiro?",
+      "Chegou uma caixa cheia disso na sua porta. O que você faz com tudo?",
+      "Isso caiu na sua roupa branca. Qual sua primeira frase?",
+      "Você vende isso na praia. O que você grita?",
+      "Sua sogra fez isso pro almoço. Que desculpa você dá pra não repetir?",
+      "Isso vira nome de banda. Que estilo de música é?",
+      "Descreva isso em 5 segundos sem dizer o nome."
+    ],
+    respira:[
+      "De 0 a 10, quanto você gosta disso?",
+      "É mais comida de festa ou do dia a dia?",
+      "Você comeria isso no café da manhã?",
+      "De 0 a 10, quanto isso é saudável?",
+      "É melhor quente ou gelado?",
+      "Isso combina mais com almoço ou com madrugada?",
+      "De 0 a 10, quanto você comeria disso agora?",
+      "Isso é comida de criança ou de adulto?",
+      "É a última coisa que você come na vida. Valeu a pena?"
+    ]
+  },
+  "Animais":{
+    aperta:[
+      "Você virou esse bicho hoje. Qual seu primeiro problema?",
+      "Esse bicho aprendeu a falar. O que ele diz primeiro?",
+      "Esse bicho arruma emprego. Que trabalho ele faz bem?",
+      "Esse bicho é o vilão do filme. Qual o nome do filme?",
+      "Esse bicho te encara na rua. O que você fala pra ele?",
+      "Explique esse bicho pra quem nunca viu.",
+      "Esse bicho entrou na sua casa. Qual seu primeiro movimento?",
+      "Esse bicho vira seu chefe. Como é a segunda-feira?",
+      "Um zoológico só com esse bicho. Qual o nome do zoológico?",
+      "Esse bicho fica do tamanho de um carro. O que muda na cidade?",
+      "Esse bicho tem rede social. O que ele posta?",
+      "Dê um nome pra esse bicho como se fosse seu pet.",
+      "Que barulho esse bicho faz?"
+    ],
+    respira:[
+      "De 0 a 10, quanto esse bicho dá medo?",
+      "Você teria isso em casa?",
+      "Esse bicho é bonito ou é feio?",
+      "De 0 a 10, quanto esse bicho parece inteligente?",
+      "Você entra num elevador com isso?",
+      "Uma máscara de luta livre desse bicho: dá medo?",
+      "Esse bicho é mais rápido ou mais lento que você?",
+      "Alguém tatuou esse bicho nas costas. Ficou bom?",
+      "De 0 a 10, quanto você gosta desse bicho?"
+    ]
+  },
+  "Profissões":{
+    aperta:[
+      "Essa pessoa erra feio no trabalho. O que acontece?",
+      "Essa profissão vira programa de TV. Que nome tem?",
+      "Um filme de ação sobre esse trabalho. Como começa?",
+      "Essa pessoa foi presa. O que ela fez?",
+      "Essa profissão acaba amanhã. Quem sente falta?",
+      "Você faz esse trabalho amanhã. Qual a parte difícil?",
+      "Fale mal desse trabalho.",
+      "Essa pessoa te atende de mau humor. O que dá errado?",
+      "Um robô assume esse trabalho. O que se perde?",
+      "Essa pessoa aparece na sua festa. O que ela acaba fazendo?",
+      "Qual a primeira coisa que essa pessoa faz ao chegar no trabalho?",
+      "Essa pessoa escreve um livro. Qual o título?",
+      "Explique esse trabalho pra uma criança de 5 anos."
+    ],
+    respira:[
+      "De 0 a 10, quanto você queria esse trabalho?",
+      "Isso ganha bem?",
+      "É mais trabalho de força ou de cabeça?",
+      "De 0 a 10, quanto esse trabalho é estressante?",
+      "Seu filho quer ser isso. Você acha bom?",
+      "Trabalha mais na rua ou em lugar fechado?",
+      "De 0 a 10, quanto você respeita essa profissão?",
+      "Você senta do lado dessa pessoa no avião. Puxa conversa?",
+      "Isso passa a pagar 100 mil por mês. Você muda de emprego?"
+    ]
+  },
+  "Lugares":{
+    aperta:[
+      "Um vilão monta o esconderijo dele aqui. Qual o nome dele?",
+      "Você fica trancado aqui 24 horas. Como se vira?",
+      "Esse lugar vira sua casa. O que você muda primeiro?",
+      "Um filme de terror se passa aqui. Como é a cena?",
+      "Você perdeu o celular aqui. O que você faz?",
+      "Esse lugar fecha pra sempre. Quem fica triste?",
+      "Que cheiro tem esse lugar?",
+      "Uma criança fica solta aqui. O que ela quebra?",
+      "Você tem 1 minuto aqui pra pegar uma coisa. O quê?",
+      "Você dorme aqui hoje. Onde você se deita?",
+      "Vira o único ponto turístico da cidade. O que põem na placa?",
+      "Qual o som que você mais ouve aqui?",
+      "Um casamento acontece aqui. Qual o maior problema?"
+    ],
+    respira:[
+      "De 0 a 10, quanto você gosta desse lugar?",
+      "Primeiro encontro nesse lugar: boa ideia?",
+      "É melhor de dia ou de noite?",
+      "De 0 a 10, quanto dá medo ir lá sozinho à noite?",
+      "Você trabalha aqui todo dia. Aguenta?",
+      "É lugar barulhento ou silencioso?",
+      "De 0 a 10, quanta gente costuma ter lá?",
+      "Você tiraria foto aqui?",
+      "Tem um desses na sua cidade?"
+    ]
+  },
+  "Objetos":{
+    aperta:[
+      "Chegou uma caixa cheia disso na sua porta. O que você faz?",
+      "Você vende isso na rua. O que você grita?",
+      "Isso vira arma num filme. Como é a luta?",
+      "Isso sumiu da sua casa. Quando você percebe?",
+      "Explique isso sem dizer pra que serve.",
+      "Isso fica do tamanho de um carro. Serve pra quê agora?",
+      "Você achou isso enterrado no quintal. O que você pensa?",
+      "Um museu põe isso na parede. Que nome dão pra obra?",
+      "Isso quebrou na pior hora. Que hora foi?",
+      "Te deram isso de presente de casamento. O que você fala?",
+      "É a única coisa que você leva pra ilha deserta. Como usa?",
+      "Isso vira nome de perfume. Como é o comercial?",
+      "Que barulho isso faz?"
+    ],
+    respira:[
+      "De 0 a 10, quanto você usa isso?",
+      "Cabe no bolso?",
+      "De 0 a 10, quanto isso é caro?",
+      "Você carrega isso o dia todo. Atrapalha?",
+      "Isso quebra fácil?",
+      "Você levaria isso numa viagem?",
+      "De 0 a 10, quanto você sentiria falta disso?",
+      "Isso passou a custar 5 mil reais. Você compra?",
+      "Isso é mais bonito ou mais útil?"
+    ]
+  },
+  "Esportes":{
+    aperta:[
+      "Você compete nisso amanhã. Qual é o seu plano?",
+      "Sua avó tenta esse esporte. Como termina?",
+      "Um filme sobre esse esporte. Como é o final?",
+      "Praticar isso na Lua. O que muda?",
+      "Onde você se machuca fazendo isso?",
+      "Explique esse esporte em uma frase.",
+      "Um bebê tenta fazer isso. O que acontece?",
+      "Esse esporte acaba amanhã. Quem sente falta?",
+      "Vira o esporte do Brasil. Qual o apelido da seleção?",
+      "Qual a desculpa clássica de quem perde nisso?",
+      "Você joga isso contra seu chefe. Como termina?",
+      "Que roupa você usa pra fazer isso?",
+      "Esse esporte vira olímpico. Como é a medalha?"
+    ],
+    respira:[
+      "De 0 a 10, quanto isso cansa?",
+      "É individual ou em time?",
+      "De 0 a 10, quanto você é bom nisso?",
+      "Você assistiria isso na TV?",
+      "Precisa de equipamento caro?",
+      "De 0 a 10, quanto isso é perigoso?",
+      "Dá pra fazer isso na rua?",
+      "É mais força ou mais técnica?",
+      "Você aposta seu dinheiro nisso. Fica nervoso?"
+    ]
+  },
+  "Filmes":{
+    aperta:[
+      "Conte a história desse filme de um jeito ruim.",
+      "Vai ter continuação. Qual o nome do filme 2?",
+      "Um personagem desse filme vira seu vizinho. Qual deles?",
+      "A escola faz uma peça disso. Que parte eles cortam?",
+      "Você refilma isso com 100 reais. Como você faz?",
+      "Que objeto desse filme você levaria pra casa?",
+      "Isso vira videogame. Como se joga?",
+      "Venda esse filme pra gente em 5 segundos.",
+      "Que cena você lembra de cor?",
+      "Você assiste isso com sua avó. Que parte dá vergonha?",
+      "Ganha uma versão brasileira. Onde se passa?",
+      "Qual seria a música de abertura?",
+      "Alguém nunca viu isso. Que spoiler você solta sem querer?"
+    ],
+    respira:[
+      "De 0 a 10, que nota você dá pra esse filme?",
+      "É bom pra ver com criança?",
+      "De 0 a 10, quanto isso te faria chorar?",
+      "Você assistiria de novo?",
+      "Tem mais ação ou mais conversa?",
+      "De 0 a 10, quanto seus pais conhecem isso?",
+      "É melhor no cinema ou em casa?",
+      "É antigo ou é recente?",
+      "Passa na TV todo domingo. Você para pra ver?"
+    ]
+  },
+  "Música":{
+    aperta:[
+      "Sua avó dança isso na festa. Como é?",
+      "Explique esse som sem cantar nada.",
+      "Você conhece alguém que só ouve isso. Como é essa pessoa?",
+      "Um show disso lota o estádio. Quem é o cantor?",
+      "Seu vizinho toca isso às 3 da manhã. O que você grita?",
+      "Isso vira o hino do Brasil. Que parte fica mais estranha?",
+      "Isso toca num velório. O que as pessoas fazem?",
+      "Que roupa usa quem curte isso?",
+      "Isso vira trilha de novela. Qual a cena?",
+      "Faça o barulho de um instrumento desse estilo.",
+      "Tocou no seu casamento sem você pedir. O que você faz?",
+      "Onde esse som toca mais?",
+      "Dê um nome pra uma banda desse estilo."
+    ],
+    respira:[
+      "De 0 a 10, quanto você gosta disso?",
+      "Dá pra dançar?",
+      "De 0 a 10, quanto isso é animado?",
+      "Seus pais gostam disso?",
+      "Você iria num show disso?",
+      "De 0 a 10, quanto isso combina com churrasco?",
+      "É brasileiro ou é de fora?",
+      "Isso vira seu despertador. Você acorda bem?",
+      "Isso toca na academia. Rende o treino?"
+    ]
+  },
+  "Viagem":{
+    aperta:[
+      "Isso aconteceu no primeiro dia da viagem. O que você faz?",
+      "Isso vira cena de filme de comédia. Como é?",
+      "Sua sogra viaja com você e isso acontece. Quem leva a culpa?",
+      "Por causa disso você perdeu o voo. O que você fala?",
+      "Um gringo passa por isso no Brasil. O que ele acha?",
+      "Você tem 1 minuto pra resolver isso. O que faz primeiro?",
+      "Explique isso pra quem nunca viajou.",
+      "Você posta isso. Qual a legenda?",
+      "Acontece 3 vezes na mesma viagem. Sua reação na terceira?",
+      "Fale bem disso como se fosse ótimo.",
+      "Qual o pior lugar do mundo pra isso acontecer?",
+      "Isso vira nome de agência de viagem. Funciona?",
+      "Que conselho você dá pra quem vai passar por isso?"
+    ],
+    respira:[
+      "De 0 a 10, quanto isso é chato?",
+      "Isso é coisa boa ou coisa ruim?",
+      "De 0 a 10, quanto isso custa?",
+      "Você viajaria sem isso?",
+      "É mais de viagem nacional ou internacional?",
+      "De 0 a 10, quanto isso já te aconteceu?",
+      "Isso aparece nas fotos da viagem?",
+      "Você viaja com alguém que odeia isso. Dá certo?",
+      "Isso vira obrigatório em toda viagem. É justo?"
+    ]
+  },
+  "Escola":{
+    aperta:[
+      "Isso acontece com você hoje, já adulto. O que você faz?",
+      "Isso vira novela. Qual é o drama?",
+      "Isso aparece no seu pesadelo. Qual a pior parte?",
+      "Que história você ainda conta sobre isso?",
+      "Você conta isso pros seus pais. Como você começa?",
+      "Explique isso pra quem nunca foi à escola.",
+      "Seu filho passa por isso. O que você fala pra ele?",
+      "Qual a desculpa clássica nessa hora?",
+      "Isso vira proibido. Qual o motivo oficial?",
+      "Que cheiro ou som te lembra isso?",
+      "Acontece na frente do seu crush. O que você faz?",
+      "O professor faz isso com a turma toda. Qual a reação?",
+      "Isso vira matéria obrigatória. Qual o nome da matéria?"
+    ],
+    respira:[
+      "De 0 a 10, quanto isso te dava ansiedade?",
+      "Você gostava disso?",
+      "De 0 a 10, quanto isso ainda existe hoje?",
+      "Isso é coisa boa ou ruim?",
+      "Quanto você pagaria pra viver isso de novo?",
+      "De 0 a 10, quanto isso marcou você?",
+      "Uma escola sem isso é melhor?",
+      "Isso acontecia todo dia?",
+      "Isso envolve os pais?"
+    ]
+  },
+  "Tecnologia":{
+    aperta:[
+      "Isso some do mundo hoje. Qual o primeiro problema?",
+      "Sua avó tenta usar isso sozinha. Como termina?",
+      "Isso falhou na pior hora. Que hora foi?",
+      "Explique isso pra alguém de 1950.",
+      "Isso começou a falar com você. O que ele diz?",
+      "Isso aparece num filme de terror. Como assusta?",
+      "Explique isso sem usar palavra difícil.",
+      "Isso te acorda às 4 da manhã. O que você fala?",
+      "Vira assunto no jantar de família. Quem briga com quem?",
+      "Qual apelido carinhoso você daria pra isso?",
+      "Isso vira uma pessoa. Que tipo de gente é?",
+      "Qual a maior mentira que contam sobre isso?",
+      "Uma criança usa isso melhor que você. Como você reage?"
+    ],
+    respira:[
+      "De 0 a 10, quanto isso te irrita?",
+      "Você viveria sem isso?",
+      "De 0 a 10, quanto sua avó entenderia isso?",
+      "Isso já existia há 20 anos?",
+      "De 0 a 10, quanto você usa isso por dia?",
+      "Isso é mais de celular ou de computador?",
+      "Isso é de graça?",
+      "De 0 a 10, quanto isso é perigoso?",
+      "Isso vai existir daqui a 10 anos?"
+    ]
+  },
+  "Festa":{
+    aperta:[
+      "Deu tudo errado nessa festa. O que aconteceu?",
+      "Você organiza isso sozinho. O que você esquece?",
+      "Sua sogra é a convidada de honra. Como fica?",
+      "Você chega e não conhece ninguém. O que você faz?",
+      "Que música não pode faltar nisso?",
+      "Isso acontece na sua casa. O que você esconde antes?",
+      "Alguém chorou nessa festa. Por quê?",
+      "Você faz um discurso nisso. Como começa?",
+      "Explique isso pra um alienígena em uma frase.",
+      "Qual a comida obrigatória nisso?",
+      "Isso vira feriado. Qual o nome do feriado?",
+      "Que tipo de pessoa estraga essa festa?",
+      "Que foto todo mundo tira nisso?"
+    ],
+    respira:[
+      "De 0 a 10, quanto você curte isso?",
+      "Vai até tarde?",
+      "De 0 a 10, quanto isso é caro?",
+      "Criança vai nisso?",
+      "Precisa se arrumar pra isso?",
+      "De 0 a 10, quanto isso é barulhento?",
+      "É coisa de família ou de amigos?",
+      "Você é obrigado a ir nisso amanhã. Anima?",
+      "Tem bebida?"
+    ]
+  },
+  "Roupas":{
+    aperta:[
+      "Você usa isso numa entrevista. O que o entrevistador pensa?",
+      "Seu chefe chega no trabalho com isso. O que você fala?",
+      "É a única roupa que você tem por um mês. Como se vira?",
+      "Explique isso pra quem nunca viu roupa.",
+      "Sua avó usa isso numa festa. Qual a reação?",
+      "Isso rasgou no meio da rua. O que você faz?",
+      "Um super-herói usa isso. Qual o poder dele?",
+      "Isso vira uniforme do país. Qual o protesto?",
+      "Que tipo de pessoa usa isso?",
+      "Te deram isso de presente. Qual sua cara?",
+      "Isso vira nome de loja. Que loja é?",
+      "Em que ocasião isso seria proibido?",
+      "Você usa isso num casamento. O que comentam?"
+    ],
+    respira:[
+      "De 0 a 10, quanto isso é confortável?",
+      "Você tem isso no armário?",
+      "De 0 a 10, quanto isso é caro?",
+      "É mais de verão ou de inverno?",
+      "De 0 a 10, quanto isso está na moda?",
+      "Serve pra homem e pra mulher?",
+      "Você dormiria vestindo isso?",
+      "Isso é bonito?",
+      "De 0 a 10, quanto isso chama atenção?"
+    ]
+  },
+  "Em casa":{
+    aperta:[
+      "Isso quebrou hoje. Qual seu primeiro pensamento?",
+      "Isso faz barulho às 3 da manhã. O que você imagina?",
+      "Explique isso pra quem nunca entrou numa casa.",
+      "Sua sogra critica o seu. O que ela fala?",
+      "Isso dobrou de tamanho. Onde você põe?",
+      "Isso aparece num filme de terror. Como assusta?",
+      "Uma visita mexeu no seu. O que você fala?",
+      "Isso sumiu de noite. Qual sua teoria?",
+      "Vira proibido em apartamento. Qual a justificativa?",
+      "Que som isso faz?",
+      "Vira o destaque da sala. Como você decora em volta?",
+      "Você está montando uma casa nova. Compra isso quando?",
+      "Que apelido sua família daria pra isso?"
+    ],
+    respira:[
+      "De 0 a 10, quanto você usa isso?",
+      "Você tem isso na sua casa?",
+      "De 0 a 10, quanto isso é caro de trocar?",
+      "Dá pra viver sem isso?",
+      "De 0 a 10, quanto isso ocupa espaço?",
+      "Precisa de energia elétrica?",
+      "Isso suja fácil?",
+      "Você fica um mês sem isso. Dá conta?",
+      "De 0 a 10, quanto isso dá problema?"
+    ]
+  },
+  "Monstros":{
+    aperta:[
+      "Você encontra isso às 3 da manhã. O que você fala?",
+      "Isso pede emprego na sua firma. Faz o quê?",
+      "Explique isso pra uma criança sem assustar ela.",
+      "Você passa a noite com isso. Como você escapa?",
+      "Isso chega na sua festa. O que os convidados fazem?",
+      "Você tem que vencer isso. Qual o ponto fraco?",
+      "Isso vira o herói do filme. Qual é a história?",
+      "Isso conta a versão dele. O que ele fala?",
+      "Isso te chamou nas redes sociais. Qual a mensagem?",
+      "Isso vira seu vizinho. Qual a primeira briga de vocês?",
+      "Que barulho isso faz?",
+      "Vira mascote de time. Qual o grito da torcida?",
+      "Onde isso mora?"
+    ],
+    respira:[
+      "De 0 a 10, quanto isso dá medo?",
+      "Isso já foi humano?",
+      "De 0 a 10, quanto isso é inteligente?",
+      "Você se fantasiaria disso no carnaval?",
+      "Isso é mais assustador ou mais engraçado?",
+      "De 0 a 10, quanto isso te dava medo quando criança?",
+      "Isso anda sozinho ou em bando?",
+      "Criança conhece isso?",
+      "Isso briga com outro monstro. Quem ganha?"
+    ]
+  }
+};
+
 function questionsFor(cat){
-  return (QUESTIONS_CAT[cat] || []).concat(QUESTIONS_GERAL);
+  const c = QUESTIONS_CAT[cat] || {aperta:[], respira:[]};
+  return {
+    aperta:  c.aperta.concat(QUESTIONS_GERAL.aperta),
+    respira: c.respira.concat(QUESTIONS_GERAL.respira)
+  };
 }
 
 
@@ -1597,8 +1785,24 @@ function pickCategory(cat){
   S.order = S.order.slice(giro).concat(S.order.slice(0, giro));
   const n = S.order.length;
   const voltas = S.settings.qRounds;
-  let qs = shuffle(questionsFor(S.category));
-  while(qs.length < n * voltas) qs = qs.concat(shuffle(questionsFor(S.category)));
+  const total = n * voltas;
+
+  /* mistura: 60% de perguntas que apertam, 40% que deixam respirar.
+     So aperto seguido nao da chance ao infiltrado; so respiro nao
+     expoe ninguem. */
+  const pool = questionsFor(S.category);
+  const nResp = Math.max(1, Math.round(total * 0.4));
+  const nAp = total - nResp;
+  const encher = (arr, quantos) => {
+    let out = shuffle(arr);
+    while(out.length < quantos) out = out.concat(shuffle(arr));
+    return out.slice(0, quantos);
+  };
+  const ap = encher(pool.aperta, nAp);
+  const rp = encher(pool.respira, nResp);
+  const tipos = shuffle(Array(nAp).fill("a").concat(Array(nResp).fill("r")));
+
+  /* monta os pares antes de distribuir as perguntas */
   S.pairs = [];
   for(let r = 0; r < voltas; r++){
     const off = 1 + (r % (n - 1));
@@ -1606,11 +1810,24 @@ function pickCategory(cat){
       S.pairs.push({
         asker: S.order[k],
         answerer: S.order[(k + off) % n],
-        q: qs[r * n + k],
         volta: r + 1
       });
     }
   }
+
+  /* a primeira resposta do infiltrado tem que ser das que deixam
+     respirar: e a unica que ele da sem nenhuma pista ainda */
+  const iPrimeira = S.pairs.findIndex(x => x.answerer === S.outIdx);
+  if(iPrimeira >= 0 && tipos[iPrimeira] !== "r"){
+    const j = tipos.indexOf("r");
+    if(j >= 0){ tipos[j] = tipos[iPrimeira]; tipos[iPrimeira] = "r"; }
+  }
+
+  let ia = 0, ir = 0;
+  S.pairs.forEach((par, i) => {
+    par.tipo = tipos[i];
+    par.q = tipos[i] === "r" ? rp[ir++] : ap[ia++];
+  });
   S.passIdx = 0;
   showPass();
 }
