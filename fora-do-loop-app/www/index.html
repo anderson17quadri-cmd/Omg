@@ -378,6 +378,23 @@
 
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:99;display:none;}
   .spacer{flex:1;min-height:14px;}
+  /* recapitulacao das perguntas */
+  .rec{
+    background:var(--white);border-radius:var(--r-sm);padding:13px 15px;margin-bottom:9px;
+    box-shadow:0 4px 0 rgba(0,0,0,.15);text-align:left;
+  }
+  .rec .quem{font-size:13px;font-weight:600;color:var(--cat);margin-bottom:3px;}
+  .rec .oq{font-size:16px;font-weight:500;line-height:1.35;color:var(--ink);}
+  .rec .volta{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-faint);margin:14px 0 8px;}
+
+  /* como cada um pontuou */
+  .bd{background:rgba(255,255,255,.22);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:18px;}
+  .bd-row{display:flex;align-items:baseline;gap:8px;font-size:15px;color:#fff;padding:3px 0;font-weight:500;}
+  .bd-row .n{font-weight:600;}
+  .bd-row .p{font-weight:700;margin-left:auto;}
+  .bd-row .por{font-size:13.5px;opacity:.85;}
+  .bd-zero{opacity:.6;}
+
   .foot{margin-top:auto;padding-top:16px;}
 </style>
 </head>
@@ -415,15 +432,16 @@
       <div class="step"><div class="step-n">1</div><div class="step-t">O celular passa de mão em mão. Todos veem a mesma <b>palavra secreta</b> — menos um, que só vê a categoria. Esse é o <b>infiltrado</b>. Não conhece a palavra? Toque em <b>“não sei o que é isso”</b> na carta.</div></div>
       <div class="step"><div class="step-n">2</div><div class="step-t">O app sorteia os pares: <b>cada jogador lê uma pergunta</b> para outro, que responde em voz alta. São <b>2 voltas</b> por padrão, então cada um responde duas vezes — dá tempo de desconfiar de alguém.</div></div>
       <div class="step"><div class="step-n">3</div><div class="step-t">Quem sabe a palavra precisa provar que sabe — <b>sem entregar</b> pros outros. Quem está fora precisa inventar uma resposta que cole.</div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-t">Depois todo mundo <b>vota em segredo</b> em quem acha que é o infiltrado.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-t">O app <b>relembra todas as perguntas</b> pra vocês discutirem. Depois cada um <b>vota em segredo</b>.</div></div>
       <div class="step"><div class="step-n">5</div><div class="step-t">Se o infiltrado for pego, ele ainda tem <b>uma chance de chutar a palavra</b>. Se acertar, o esforço do grupo <b>vira pó</b>.</div></div>
     </div>
     <h2 style="margin-top:22px;">Pontos</h2>
     <div class="card">
-      <p><b style="color:var(--good)">Pegaram o infiltrado</b><br><span style="color:var(--muted);font-size:14px;">+1 para cada jogador que sabia a palavra.</span></p>
-      <p><b style="color:var(--accent)">Infiltrado escapou</b><br><span style="color:var(--muted);font-size:14px;">+2 para o infiltrado. Empate na votação também conta como escapada.</span></p>
-      <p><b style="color:var(--gold)">Infiltrado pego, mas acertou a palavra</b><br><span style="color:var(--muted);font-size:14px;">O acerto do grupo é anulado: ninguém do grupo pontua e o infiltrado leva +2.</span></p>
+      <p><b>Votou no infiltrado: +1</b><br><span style="color:var(--ink-soft);font-size:15px;">Vale por pessoa, não por grupo. Acertou o voto, pontuou — mesmo que o resto da mesa erre.</span></p>
+      <p><b>Infiltrado escapa: +1</b><br><span style="color:var(--ink-soft);font-size:15px;">Não foi o mais votado, ou deu empate.</span></p>
+      <p><b>Infiltrado pego, mas acerta a palavra: +2</b><br><span style="color:var(--ink-soft);font-size:15px;">E o grupo inteiro fica sem pontuar na rodada.</span></p>
     </div>
+    <div class="tip"><span class="tip-ico">⚖️</span><span class="tip-tx">Todo mundo é infiltrado o <b>mesmo número de vezes</b> antes de alguém repetir — ninguém ganha por sorte do sorteio.</span></div>
     <div class="foot"><button class="btn" onclick="go('s-home')">Entendi</button></div>
   </div>
 
@@ -556,6 +574,18 @@
     <div class="foot"><button class="btn" id="talk-next" onclick="nextQuestion()">Respondeu · próxima</button></div>
   </div>
 
+  <!-- ============ RECAPITULAR ============ -->
+  <div class="screen" id="s-recap">
+    <div class="topbar">
+      <span class="pill" id="recap-cat">Categoria</span>
+      <span class="pill hot">Hora de discutir</span>
+    </div>
+    <h1 class="out thin">O que foi dito</h1>
+    <p class="sub">Relembrem as respostas antes de votar.</p>
+    <div id="recap-list"></div>
+    <div class="foot"><button class="btn" onclick="startVoting()">Já discutimos · votar</button></div>
+  </div>
+
   <!-- ============ VOTO ============ -->
   <div class="screen" id="s-vote">
     <div class="topbar">
@@ -596,6 +626,8 @@
       <div class="big out" id="res-big"></div>
       <div class="small" id="res-small"></div>
     </div>
+    <div class="eyebrow">Como cada um pontuou</div>
+    <div class="bd" id="res-breakdown"></div>
     <div class="eyebrow">Placar</div>
     <div id="res-scores"></div>
     <div class="foot">
@@ -1177,8 +1209,8 @@ let S = {
   settings: { rounds:5, timer:30, vote:"secret", qRounds:2, cats:Object.keys(BANK).slice() },
   round:0, category:null, word:null, outIdx:null,
   order:[], pairs:[], qStep:0, passIdx:0,
-  votes:{}, voterIdx:0, accused:null, caught:false,
-  guess:null, guessRight:false, delta:{}
+  votes:{}, voterIdx:0, accused:null, caught:false, outBag:[],
+  guess:null, guessRight:false, delta:{}, motivo:{}
 };
 
 /* ============ UTIL ============ */
@@ -1340,13 +1372,13 @@ function startGame(){
   err.className = "err";
   S.players = names;
   S.scores = {}; names.forEach(n => S.scores[n] = 0);
-  S.round = 0;
+  S.round = 0; S.outBag = [];
   save();
   startRound();
 }
 function rematch(){
   Object.keys(S.scores).forEach(n => S.scores[n] = 0);
-  S.round = 0;
+  S.round = 0; S.outBag = [];
   startRound();
 }
 function quitGame(){ showFinal(); }
@@ -1354,7 +1386,7 @@ function quitGame(){ showFinal(); }
 function startRound(){
   S.round += 1;
   S.votes = {}; S.voterIdx = 0; S.accused = null; S.caught = false;
-  S.guess = null; S.guessRight = false; S.delta = {}; S.qStep = 0;
+  S.guess = null; S.guessRight = false; S.delta = {}; S.motivo = {}; S.qStep = 0;
   showCatPick();
 }
 
@@ -1390,11 +1422,19 @@ function showCatPick(){
   go("s-cat");
 }
 
+/* rodizio: todo mundo e infiltrado o mesmo numero de vezes antes de repetir */
+function sortearInfiltrado(){
+  if(!Array.isArray(S.outBag) || !S.outBag.length || S.outBag.some(i => i >= S.players.length)){
+    S.outBag = shuffle(S.players.map((_,i) => i));
+  }
+  return S.outBag.pop();
+}
+
 function pickCategory(cat){
   buzz(10);
   S.category = cat || pick(S.settings.cats);
   S.word = pick(BANK[S.category]);
-  S.outIdx = Math.floor(Math.random() * S.players.length);
+  S.outIdx = sortearInfiltrado();
   S.order = shuffle(S.players.map((_,i) => i));
   const n = S.order.length;
   const voltas = S.settings.qRounds;
@@ -1532,7 +1572,7 @@ function nextQuestion(){
   stopTimer();
   buzz(8);
   S.qStep += 1;
-  if(S.qStep >= S.pairs.length) startVoting();
+  if(S.qStep >= S.pairs.length) showRecap();
   else renderQuestion();
 }
 
@@ -1580,6 +1620,43 @@ function toggleTimer(){
 }
 
 /* ============ VOTAÇÃO ============ */
+function showRecap(){
+  document.getElementById("recap-cat").textContent = S.category;
+  const list = document.getElementById("recap-list");
+  list.innerHTML = "";
+  let voltaAtual = 0;
+  S.pairs.forEach((step, i) => {
+    if(S.settings.qRounds > 1 && step.volta !== voltaAtual){
+      voltaAtual = step.volta;
+      const t = document.createElement("div");
+      t.className = "rec volta";
+      t.style.background = "none"; t.style.boxShadow = "none"; t.style.padding = "0";
+      t.textContent = "Volta " + step.volta;
+      list.appendChild(t);
+    }
+    const d = document.createElement("div");
+    d.className = "rec stagger";
+    d.style.animationDelay = (i * 30) + "ms";
+    const q = document.createElement("div");
+    q.className = "quem";
+    q.textContent = S.players[step.asker] + " → " + S.players[step.answerer];
+    const o = document.createElement("div");
+    o.className = "oq";
+    o.textContent = step.q;
+    d.appendChild(q); d.appendChild(o);
+    list.appendChild(d);
+  });
+  go("s-recap");
+}
+
+/* quem apontou o infiltrado — no voto em grupo, vale pro grupo todo */
+function acertaramVoto(){
+  if(S.settings.vote === "quick"){
+    return (S.accused === S.outIdx) ? S.players.map((_,i) => i).filter(i => i !== S.outIdx) : [];
+  }
+  return Object.keys(S.votes).map(Number).filter(v => S.votes[v] === S.outIdx);
+}
+
 function startVoting(){
   stopTimer();
   S.votes = {}; S.voterIdx = 0;
@@ -1717,41 +1794,71 @@ function showResult(){
   const big = document.getElementById("res-big");
   const small = document.getElementById("res-small");
 
+  const acertaram = acertaramVoto();
+  const nomesAcertaram = acertaram.map(i => S.players[i]);
+  S.motivo = {};
+  const motivo = (name, txt) => { S.motivo[name] = txt; };
+
   if(S.caught && S.guessRight){
+    /* pego, mas acertou a palavra: o acerto do grupo e anulado */
     bump(outName, 2);
+    motivo(outName, "pego, mas acertou a palavra");
+    S.players.forEach(n => { if(n !== outName) motivo(n, "anulado pelo chute certeiro"); });
     banner.className = "banner bad";
     ico.textContent = "🔓";
     big.textContent = "Pegaram " + outName + "... e não adiantou nada.";
     small.innerHTML = 'Descoberto, ' + esc(outName) + ' ainda chutou <b>' + esc(S.word) +
-      '</b> e acertou. O acerto do grupo é anulado: +2 para ' + esc(outName) + ', nada para o resto.';
+      '</b> e acertou. O grupo não pontua nesta rodada.';
     buzz([25,60,25]);
-  } else if(S.caught){
-    S.players.forEach((n,i) => { if(i !== S.outIdx) bump(n,1); });
-    banner.className = "banner good";
-    ico.textContent = "🎯";
-    big.textContent = "Pegaram! " + outName + " estava fora do loop.";
-    if(S.guess){
-      small.innerHTML = 'A palavra era <b>' + esc(S.word) + '</b>. ' + esc(outName) +
-        ' chutou "' + esc(S.guess) + '" e errou. +1 para cada um do grupo.';
-    } else {
-      small.innerHTML = 'A palavra era <b>' + esc(S.word) + '</b> e ' + esc(outName) +
-        ' não soube chutar. +1 para cada um do grupo.';
-    }
-    confetti();
   } else {
-    bump(outName,2);
-    banner.className = "banner bad";
-    ico.textContent = "🕵️";
-    if(S.accused === null){
-      big.textContent = outName + " escapou no empate.";
-      small.innerHTML = 'Ninguém teve votos suficientes. A palavra era <b>' + esc(S.word) + '</b>. +2 para ' + esc(outName) + '.';
+    acertaram.forEach(i => { bump(S.players[i], 1); motivo(S.players[i], "votou no infiltrado"); });
+    S.players.forEach((n,i) => {
+      if(i === S.outIdx || S.motivo[n]) return;
+      motivo(n, "votou errado");
+    });
+    if(S.caught){
+      motivo(outName, S.guess ? 'chutou "' + S.guess + '" e errou' : "não soube chutar");
+      banner.className = "banner good";
+      ico.textContent = "🎯";
+      big.textContent = "Pegaram! " + outName + " estava fora do loop.";
+      small.innerHTML = 'A palavra era <b>' + esc(S.word) + '</b>. ' +
+        (nomesAcertaram.length
+          ? 'Quem votou certo leva 1 ponto: ' + esc(nomesAcertaram.join(", ")) + '.'
+          : 'Ninguém apontou certo, então ninguém pontua.');
+      confetti();
     } else {
-      big.textContent = "Erraram! Era " + outName + ".";
-      small.innerHTML = 'O grupo votou em ' + esc(S.players[S.accused]) + '. A palavra era <b>' +
-        esc(S.word) + '</b>. +2 para ' + esc(outName) + '.';
+      bump(outName, 1);
+      motivo(outName, "escapou da votação");
+      banner.className = "banner bad";
+      ico.textContent = "🕵️";
+      big.textContent = (S.accused === null)
+        ? outName + " escapou no empate."
+        : "Erraram! Era " + outName + ".";
+      small.innerHTML = 'A palavra era <b>' + esc(S.word) + '</b>. ' +
+        esc(outName) + ' leva 1 ponto por escapar' +
+        (nomesAcertaram.length
+          ? ', e quem votou certo mesmo assim leva 1: ' + esc(nomesAcertaram.join(", ")) + '.'
+          : '. Ninguém apontou certo.');
+      buzz([25,60,25]);
     }
-    buzz([25,60,25]);
   }
+
+  /* quem ganhou o que, e por que */
+  const bd = document.getElementById("res-breakdown");
+  bd.innerHTML = "";
+  S.players.forEach(n => {
+    const g = S.delta[n] || 0;
+    const row = document.createElement("div");
+    row.className = "bd-row" + (g ? "" : " bd-zero");
+    const nm = document.createElement("span");
+    nm.className = "n"; nm.textContent = n + (n === outName ? " (infiltrado)" : "");
+    const por = document.createElement("span");
+    por.className = "por"; por.textContent = S.motivo[n] || "";
+    const pt = document.createElement("span");
+    pt.className = "p"; pt.textContent = g ? "+" + g : "0";
+    row.appendChild(nm); row.appendChild(por); row.appendChild(pt);
+    bd.appendChild(row);
+  });
 
   document.getElementById("res-round").textContent = "Rodada " + S.round;
   document.getElementById("res-cat").textContent = S.category;
